@@ -1,0 +1,15 @@
+{
+  "hasSrc": true,
+  "packages": [
+    "drizzle",
+    "clerk",
+    "trpc",
+    "shadcn-ui"
+  ],
+  "preferredPackageManager": "yarn",
+  "rootPath": "src/",
+  "driver": "mysql",
+  "provider": "planetscale",
+  "orm": "drizzle",
+  "auth": "clerk"
+}
