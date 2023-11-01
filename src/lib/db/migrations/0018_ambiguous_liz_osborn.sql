@@ -1,0 +1,1 @@
+ALTER TABLE `lesson_categories` ADD `image` varchar(256);

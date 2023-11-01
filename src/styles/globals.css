@@ -26,6 +26,90 @@
   --color-primary-800: rgb(var(--tw-color-primary-800)); /* #075985 */
   --color-primary-900: rgb(var(--tw-color-primary-900)); /* #0c4a6e */
   /* #endregion  /**======== Primary Color =========== */
+  /* #region /**=========== Japan Color =========== */
+  --tw-color-japan-50: 254 242 242;
+  --tw-color-japan-100: 254 226 226;
+  --tw-color-japan-200: 254 202 202;
+  --tw-color-japan-300: 252 165 165;
+  --tw-color-japan-400: 248 113 113;
+  --tw-color-japan-500: 239 68 68;
+  --tw-color-japan-600: 220 38 38;
+  --tw-color-japan-700: 185 28 28;
+  --tw-color-japan-800: 153 27 27;
+  --tw-color-japan-900: 127 29 29;
+  --tw-color-japan-950: 69 10 10;
+  --color-japan-50: rgb(var(--tw-color-japan-50)); /* #fef2f2 */
+  --color-japan-100: rgb(var(--tw-color-japan-100)); /* #fee2e2 */
+  --color-japan-200: rgb(var(--tw-color-japan-200)); /* #fecaca */
+  --color-japan-300: rgb(var(--tw-color-japan-300)); /* #fca5a5 */
+  --color-japan-400: rgb(var(--tw-color-japan-400)); /* #f87171 */
+  --color-japan-500: rgb(var(--tw-color-japan-500)); /* #ef4444 */
+  --color-japan-600: rgb(var(--tw-color-japan-600)); /* #dc2626 */
+  --color-japan-700: rgb(var(--tw-color-japan-700)); /* #b91c1c */
+  --color-japan-800: rgb(var(--tw-color-japan-800)); /* #991b1b */
+  --color-japan-900: rgb(var(--tw-color-japan-900)); /* #7f1d1d */
+  --color-japan-950: rgb(var(--tw-color-japan-950)); /* #450a0a */
+  /* #endregion  /**======== Japan Color =========== */
+}
+
+/* styles.css or your appropriate CSS/SCSS file */
+
+@keyframes correctSwipe {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.card-correct-swipe {
+  animation: correctSwipe 0.5s forwards;
+}
+.card-incorrect-swipe {
+  animation: shake 0.5s;
+  background-color: rgba(255, 0, 0, 0.2); /* Red with 20% opacity */
+}
+
+.HoverCardContent {
+  transform-origin: var(--radix-hover-card-content-transform-origin);
+  animation: scaleIn 0.1s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-5px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(10px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-15px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(15px, 0, 0);
+  }
 }
 
 @layer base {

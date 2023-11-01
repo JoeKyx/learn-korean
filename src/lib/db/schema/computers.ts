@@ -1,6 +1,6 @@
+import { int,mysqlTable, serial, varchar } from "drizzle-orm/mysql-core";
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { z } from 'zod';
-import { mysqlTable, serial, varchar, int } from "drizzle-orm/mysql-core";
 
 export const computers = mysqlTable("computers", {
   id: serial("id").primaryKey(),

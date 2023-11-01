@@ -1,0 +1,1 @@
+ALTER TABLE `lessons` ADD `language_id` int NOT NULL;

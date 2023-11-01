@@ -1,0 +1,1 @@
+ALTER TABLE `lessons` ADD `lesson_category_id` int NOT NULL;

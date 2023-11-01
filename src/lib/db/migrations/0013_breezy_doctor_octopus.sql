@@ -1,0 +1,1 @@
+ALTER TABLE `word_categories` ADD `icon` varchar(256) NOT NULL;

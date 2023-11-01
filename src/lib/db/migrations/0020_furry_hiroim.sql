@@ -1,0 +1,1 @@
+ALTER TABLE `words` ADD `word_de` varchar(256);

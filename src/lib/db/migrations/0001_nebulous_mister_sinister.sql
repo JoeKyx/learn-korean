@@ -1,0 +1,1 @@
+ALTER TABLE `words` ADD `pronunciation` varchar(256);

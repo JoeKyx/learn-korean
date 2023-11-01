@@ -1,8 +1,9 @@
-import { env } from "@/lib/env.mjs";
-  
+import { connect } from "@planetscale/database";
 import { drizzle } from "drizzle-orm/planetscale-serverless";
 import { migrate } from "drizzle-orm/planetscale-serverless/migrator";
-import { connect } from "@planetscale/database";
+
+import { env } from "@/lib/env.mjs";
+import logger from "@/lib/logger";
 
 
 const runMigrate = async () => {
@@ -16,7 +17,7 @@ const connection = connect({ url: env.DATABASE_URL });
 const db = drizzle(connection);
 
 
-  console.log("⏳ Running migrations...");
+  logger("⏳ Running migrations...");
 
   const start = Date.now();
 
@@ -24,13 +25,13 @@ const db = drizzle(connection);
 
   const end = Date.now();
 
-  console.log("✅ Migrations completed in", end - start, "ms");
+  logger("✅ Migrations completed in "+ (end - start).toString()+ " ms");
 
   process.exit(0);
 };
 
 runMigrate().catch((err) => {
-  console.error("❌ Migration failed");
-  console.error(err);
+  logger("❌ Migration failed");
+  logger(err);
   process.exit(1);
 });

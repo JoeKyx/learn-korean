@@ -1,0 +1,153 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1696079052657,
+      "tag": "0000_sudden_sersi",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1696162037879,
+      "tag": "0001_nebulous_mister_sinister",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1696163941156,
+      "tag": "0002_magical_fallen_one",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1696983740234,
+      "tag": "0003_spicy_the_leader",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1697443180093,
+      "tag": "0004_wandering_speed_demon",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1697443519217,
+      "tag": "0005_burly_shard",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1697447867163,
+      "tag": "0006_strange_rhino",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1697512556548,
+      "tag": "0007_legal_professor_monster",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1697514592194,
+      "tag": "0008_famous_makkari",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1697524227587,
+      "tag": "0009_numerous_moira_mactaggert",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1697541566821,
+      "tag": "0010_amused_may_parker",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1697597487500,
+      "tag": "0011_acoustic_patriot",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "5",
+      "when": 1697597577684,
+      "tag": "0012_lively_freak",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "5",
+      "when": 1697597833785,
+      "tag": "0013_breezy_doctor_octopus",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "5",
+      "when": 1697622898360,
+      "tag": "0014_red_lady_ursula",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "5",
+      "when": 1697700733778,
+      "tag": "0015_smiling_dormammu",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "5",
+      "when": 1698134981971,
+      "tag": "0016_dry_agent_zero",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "5",
+      "when": 1698135072374,
+      "tag": "0017_cool_mockingbird",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "5",
+      "when": 1698147779866,
+      "tag": "0018_ambiguous_liz_osborn",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "5",
+      "when": 1698252754310,
+      "tag": "0019_same_peter_parker",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "5",
+      "when": 1698555017824,
+      "tag": "0020_furry_hiroim",
+      "breakpoints": true
+    }
+  ]
+}

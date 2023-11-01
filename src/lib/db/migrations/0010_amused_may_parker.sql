@@ -1,0 +1,1 @@
+ALTER TABLE `languages` ADD `greeting` varchar(256) NOT NULL;

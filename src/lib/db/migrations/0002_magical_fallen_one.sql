@@ -1,0 +1,1 @@
+ALTER TABLE `lessons` ADD `lesson_number` int NOT NULL;

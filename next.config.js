@@ -4,6 +4,8 @@ const nextConfig = {
     dirs: ['src'],
   },
 
+  transpilePackages: ['lucide-react'],
+
   reactStrictMode: true,
   swcMinify: true,
 
@@ -42,7 +44,13 @@ const nextConfig = {
 
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
+    config.resolve.fallback = {
+      // if you miss it, all the other options in fallback, specified
+      // by next.js will be dropped.
+      ...config.resolve.fallback,
 
+      fs: false, // the solution
+    };
     return config;
   },
 };
