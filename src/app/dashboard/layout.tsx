@@ -1,12 +1,11 @@
 import React from 'react'
 
 import { getLanguages } from '@/lib/api/languages/queries';
-import { getLessons, getLessonsWithCategory } from '@/lib/api/lessons/queries';
+import { getLessonsWithCategory } from '@/lib/api/lessons/queries';
 import { getUserSettings } from '@/lib/api/userSettings/queries';
 
 import { SettingsProvider } from '@/components/context/settingsContext';
 import { DashboardNavbar } from '@/components/navigation/DashboardNavbar';
-import { getLessonCategories } from '@/lib/api/lessonCategories/queries';
 export default async function layout({
   children,
 }: {

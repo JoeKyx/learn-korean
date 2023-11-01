@@ -1,11 +1,12 @@
+import { createLessonCategorie, deleteLessonCategorie, updateLessonCategorie } from "@/lib/api/lessonCategories/mutations";
 import { getLessonCategorieById, getLessonCategories } from "@/lib/api/lessonCategories/queries";
-import { publicProcedure, router } from "../trpc";
 import {
-  lessonCategorieIdSchema,
   insertLessonCategorieParams,
+  lessonCategorieIdSchema,
   updateLessonCategorieParams,
 } from "@/lib/db/schema/lessonCategories";
-import { createLessonCategorie, deleteLessonCategorie, updateLessonCategorie } from "@/lib/api/lessonCategories/mutations";
+
+import { publicProcedure, router } from "../trpc";
 
 export const lessonCategoriesRouter = router({
   getLessonCategories: publicProcedure.query(async () => {

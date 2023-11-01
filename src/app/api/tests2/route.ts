@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import {
@@ -8,8 +8,8 @@ import {
   updateTests,
 } from "@/lib/api/tests2/mutations";
 import { 
-  testsIdSchema,
   insertTestsParams,
+  testsIdSchema,
   updateTestsParams 
 } from "@/lib/db/schema/tests2";
 

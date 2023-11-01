@@ -1,6 +1,10 @@
 "use client";
 
 import { useState } from "react";
+
+import { Test } from "@/lib/db/schema/tests";
+
+import TestForm from "./TestForm";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -9,8 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import TestForm from "./TestForm";
-import { Test } from "@/lib/db/schema/tests";
 
 export default function TestModal({ 
   test,

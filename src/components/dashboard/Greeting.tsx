@@ -1,8 +1,7 @@
-import { useSettings } from '@/components/context/settingsContext'
-import { Language } from '@/lib/db/schema/languages';
-import { trpc } from '@/lib/trpc/client';
-import { cn } from '@/lib/utils';
 import React from 'react'
+
+import { Language } from '@/lib/db/schema/languages';
+import { cn } from '@/lib/utils';
 
 export default function Greeting({ className, language }: { className?: string, language: Language }) {
 

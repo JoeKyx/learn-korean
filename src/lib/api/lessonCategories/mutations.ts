@@ -1,14 +1,14 @@
-import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
+
+import { db } from "@/lib/db";
 import { 
+  insertLessonCategorieSchema, 
   LessonCategorieId, 
+  lessonCategorieIdSchema, 
+  lessonCategories,
   NewLessonCategorieParams,
   UpdateLessonCategorieParams, 
-  updateLessonCategorieSchema,
-  insertLessonCategorieSchema, 
-  lessonCategories,
-  lessonCategorieIdSchema 
-} from "@/lib/db/schema/lessonCategories";
+  updateLessonCategorieSchema} from "@/lib/db/schema/lessonCategories";
 
 export const createLessonCategorie = async (lessonCategorie: NewLessonCategorieParams) => {
   const newLessonCategorie = insertLessonCategorieSchema.parse(lessonCategorie);

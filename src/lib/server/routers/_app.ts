@@ -1,16 +1,16 @@
+import { datesStudiedRouter } from "./datesStudied";
+import { languagesRouter } from "./languages";
+import { lessonCategoriesRouter } from "./lessonCategories";
 import { lessonsRouter } from "./lessons";
-import { userWordsRouter } from "./userWords";
-import { wordsRouter } from "./words";
-import { router } from "../trpc";
+import { testingModelsRouter } from "./testingModels";
 import { testsRouter } from "./tests";
 import { tests2Router } from "./tests2";
-import { languagesRouter } from "./languages";
 import { userSettingsRouter } from "./userSettings";
-import { testingModelsRouter } from "./testingModels";
+import { userWordsRouter } from "./userWords";
 import { wordCategoriesRouter } from "./wordCategories";
+import { wordsRouter } from "./words";
 import { wordUserCategoriesRouter } from "./wordUserCategories";
-import { datesStudiedRouter } from "./datesStudied";
-import { lessonCategoriesRouter } from "./lessonCategories";
+import { router } from "../trpc";
 
 export const appRouter = router({
   words: wordsRouter,

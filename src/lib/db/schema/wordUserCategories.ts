@@ -1,6 +1,7 @@
-import { int, timestamp, serial, varchar, mysqlTable } from "drizzle-orm/mysql-core";
+import { int, mysqlTable,serial, timestamp, varchar } from "drizzle-orm/mysql-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
+
 import { getWordUserCategories } from "@/lib/api/wordUserCategories/queries";
 
 export const wordUserCategories = mysqlTable('word_user_categories', {

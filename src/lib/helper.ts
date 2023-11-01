@@ -12,7 +12,7 @@ export function getFromSessionStorage(key: string): string | null {
   return null;
 }
 
-export function shuffleArray(array: any[]): any[] {
+export function shuffleArray<T>(array: T[]): T[] {
   let currentIndex = array.length, randomIndex;
 
   while (currentIndex !== 0) {

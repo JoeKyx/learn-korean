@@ -1,5 +1,6 @@
 import { and, eq } from "drizzle-orm";
 
+import { getUserAuth } from "@/lib/auth/utils";
 import { db } from "@/lib/db";
 import { 
   insertLessonSchema, 
@@ -10,7 +11,6 @@ import {
   UpdateLessonParams, 
   updateLessonSchema} from "@/lib/db/schema/lessons";
 import logger from "@/lib/logger";
-import { getUserAuth } from "@/lib/auth/utils";
 
 export const createLesson = async (lesson: NewLessonParams) => {
   const { session } = await getUserAuth();

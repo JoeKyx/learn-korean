@@ -2,8 +2,8 @@ import { int, mysqlTable,serial, varchar } from "drizzle-orm/mysql-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 
-import { getLessons, getLessonsWithCategory, getPracticeLessons } from "@/lib/api/lessons/queries";
 import { getDatesStudiedByLanguage } from "@/lib/api/datesStudied/queries";
+import { getLessons, getLessonsWithCategory, getPracticeLessons } from "@/lib/api/lessons/queries";
 
 export const lessons = mysqlTable('lessons', {
   id: serial("id").primaryKey(),

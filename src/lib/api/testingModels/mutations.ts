@@ -1,14 +1,14 @@
-import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
+
+import { db } from "@/lib/db";
 import { 
-  TestingModelId, 
-  NewTestingModelParams,
-  UpdateTestingModelParams, 
-  updateTestingModelSchema,
   insertTestingModelSchema, 
+  NewTestingModelParams,
+  TestingModelId, 
+  testingModelIdSchema, 
   testingModels,
-  testingModelIdSchema 
-} from "@/lib/db/schema/testingModels";
+  UpdateTestingModelParams, 
+  updateTestingModelSchema} from "@/lib/db/schema/testingModels";
 
 export const createTestingModel = async (testingModel: NewTestingModelParams) => {
   const newTestingModel = insertTestingModelSchema.parse(testingModel);

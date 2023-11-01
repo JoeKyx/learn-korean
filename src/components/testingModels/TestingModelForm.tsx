@@ -1,8 +1,12 @@
 "use client";
 
-import { TestingModel, NewTestingModelParams, insertTestingModelParams } from "@/lib/db/schema/testingModels";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import { insertTestingModelParams,NewTestingModelParams, TestingModel } from "@/lib/db/schema/testingModels";
+import { trpc } from "@/lib/trpc/client";
 
 import {
   Form,
@@ -13,13 +17,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { trpc } from "@/lib/trpc/client";
-import { Button } from "../ui/button";
-import { z } from "zod";
-import { Checkbox } from "../ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+
+import { Button } from "../ui/button";
+import { Checkbox } from "../ui/checkbox";
 
 const TestingModelForm = ({
   testingModel,
@@ -82,7 +84,7 @@ const TestingModelForm = ({
   };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className={"space-y-8"}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="name"
@@ -116,7 +118,7 @@ const TestingModelForm = ({
               <FormLabel>A Boolean</FormLabel>
                 <br />
             <FormControl>
-              <Checkbox {...field} checked={!!field.value} onCheckedChange={field.onChange} value={""} />
+              <Checkbox {...field} checked={!!field.value} onCheckedChange={field.onChange} value="" />
             </FormControl>
               <FormMessage />
             </FormItem>
@@ -161,7 +163,7 @@ const TestingModelForm = ({
         {editing ? (
           <Button
             type="button"
-            variant={"destructive"}
+            variant="destructive"
             onClick={() => deleteTestingModel({ id: testingModel.id })}
           >
             Delet{isDeleting ? "ing..." : "e"}

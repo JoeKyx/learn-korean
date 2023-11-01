@@ -1,5 +1,6 @@
-import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
+
+import { db } from "@/lib/db";
 import { type WordCategorieId, wordCategorieIdSchema, wordCategories } from "@/lib/db/schema/wordCategories";
 
 export const getWordCategories = async () => {

@@ -1,10 +1,13 @@
 "use client"
-import Button from '@/components/buttons/Button';
 import { Plus } from 'lucide-react';
-import { FC, forwardRef, useEffect } from 'react'
+import { FC, forwardRef } from 'react'
 import { HTMLAttributes } from 'react';
-import { useSettings } from '@/components/context/settingsContext';
 import { useState } from 'react';
+
+import Button from '@/components/buttons/Button';
+import { useSettings } from '@/components/context/settingsContext';
+import AddNewLessonForm from '@/components/lessons/AddNewLessonForm';
+
 import {
   Dialog,
   DialogContent,
@@ -12,9 +15,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-
-import AddNewLessonForm from '@/components/lessons/AddNewLessonForm';
-import TestingModelForm from '@/components/testingModels/TestingModelForm';
 
 type AddNewLessonButtonProps = HTMLAttributes<HTMLButtonElement>;
 

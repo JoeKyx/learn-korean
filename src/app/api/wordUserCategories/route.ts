@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import {
@@ -8,10 +8,9 @@ import {
   updateWordUserCategorie,
 } from "@/lib/api/wordUserCategories/mutations";
 import { 
-  wordUserCategorieIdSchema,
   insertWordUserCategorieParams,
-  updateWordUserCategorieParams 
-} from "@/lib/db/schema/wordUserCategories";
+  updateWordUserCategorieParams, 
+  wordUserCategorieIdSchema} from "@/lib/db/schema/wordUserCategories";
 
 export async function POST(req: Request) {
   try {

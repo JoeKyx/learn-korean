@@ -1,4 +1,4 @@
-import { varchar, serial, mysqlTable } from "drizzle-orm/mysql-core";
+import { mysqlTable,serial, varchar } from "drizzle-orm/mysql-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 

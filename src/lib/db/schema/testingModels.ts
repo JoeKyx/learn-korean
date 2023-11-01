@@ -1,8 +1,9 @@
-import { varchar, int, boolean, serial, mysqlTable } from "drizzle-orm/mysql-core";
+import { boolean, int, mysqlTable,serial, varchar } from "drizzle-orm/mysql-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
-import { languages } from "./languages"
+
 import { getTestingModels } from "@/lib/api/testingModels/queries";
+
 
 export const testingModels = mysqlTable('testing_models', {
   id: serial("id").primaryKey(),

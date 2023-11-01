@@ -1,12 +1,15 @@
 "use client";
+import { useUser } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { useUser } from "@clerk/nextjs";
+import { insertLessonParams, Lesson, NewLessonParams, USER_LESSON_ID } from "@/lib/db/schema/lessons";
+import logger from "@/lib/logger";
 import { trpc } from "@/lib/trpc/client";
 
+import Button from "@/components/buttons/Button";
 import {
   Form,
   FormControl,
@@ -17,10 +20,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import Button from "@/components/buttons/Button";
-import { insertLessonParams, Lesson, NewLessonParams, USER_LESSON_ID } from "@/lib/db/schema/lessons";
-import logger from "@/lib/logger";
-import { useSettings } from "@/components/context/settingsContext";
 const LessonForm = ({
   lesson,
   closeModal,

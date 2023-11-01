@@ -1,9 +1,9 @@
-import {eq, isNull, or, and } from "drizzle-orm";
+import {and,eq, isNull, or } from "drizzle-orm";
 
+import { getUserAuth } from "@/lib/auth/utils";
 import { db } from "@/lib/db";
 import { userWords } from "@/lib/db/schema/userWords";
 import { type WordId, wordIdSchema, words } from "@/lib/db/schema/words";
-import { getUserAuth } from "@/lib/auth/utils";
 import { wordUserCategories } from "@/lib/db/schema/wordUserCategories";
 
 export const getWords = async () => {

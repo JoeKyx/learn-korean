@@ -1,8 +1,9 @@
-import { useSettings } from '@/components/context/settingsContext'
-import ButtonLink from '@/components/links/ButtonLink'
+import React from 'react'
+
 import { Language } from '@/lib/db/schema/languages'
 import { cn } from '@/lib/utils'
-import React from 'react'
+
+import ButtonLink from '@/components/links/ButtonLink'
 
 export default function PracticeLanguageLink({ className, language }: { className?: string, language: Language }) {
 

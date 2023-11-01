@@ -1,11 +1,12 @@
+import { createTestingModel, deleteTestingModel, updateTestingModel } from "@/lib/api/testingModels/mutations";
 import { getTestingModelById, getTestingModels } from "@/lib/api/testingModels/queries";
-import { publicProcedure, router } from "../trpc";
 import {
-  testingModelIdSchema,
   insertTestingModelParams,
+  testingModelIdSchema,
   updateTestingModelParams,
 } from "@/lib/db/schema/testingModels";
-import { createTestingModel, deleteTestingModel, updateTestingModel } from "@/lib/api/testingModels/mutations";
+
+import { publicProcedure, router } from "../trpc";
 
 export const testingModelsRouter = router({
   getTestingModels: publicProcedure.query(async () => {

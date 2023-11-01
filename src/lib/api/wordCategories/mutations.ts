@@ -1,14 +1,14 @@
-import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
+
+import { db } from "@/lib/db";
 import { 
-  WordCategorieId, 
+  insertWordCategorieSchema, 
   NewWordCategorieParams,
   UpdateWordCategorieParams, 
   updateWordCategorieSchema,
-  insertWordCategorieSchema, 
-  wordCategories,
-  wordCategorieIdSchema 
-} from "@/lib/db/schema/wordCategories";
+  WordCategorieId, 
+  wordCategorieIdSchema, 
+  wordCategories} from "@/lib/db/schema/wordCategories";
 
 export const createWordCategorie = async (wordCategorie: NewWordCategorieParams) => {
   const newWordCategorie = insertWordCategorieSchema.parse(wordCategorie);

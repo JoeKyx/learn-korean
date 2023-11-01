@@ -1,7 +1,8 @@
-import AddNewLessonForm from "@/components/lessons/AddNewLessonForm";
-import WordList from "@/components/words/wordList";
 import { getAllLessons, getLessonById } from "@/lib/api/lessons/queries";
 import { getWordsByLessonId } from "@/lib/api/words/queries";
+
+import AddNewLessonForm from "@/components/lessons/AddNewLessonForm";
+import WordList from "@/components/words/wordList";
 
 export async function generateStaticParams() {
   const lessonsRes = await getAllLessons();

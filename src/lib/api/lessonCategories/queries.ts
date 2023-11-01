@@ -1,5 +1,6 @@
-import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
+
+import { db } from "@/lib/db";
 import { type LessonCategorieId, lessonCategorieIdSchema, lessonCategories } from "@/lib/db/schema/lessonCategories";
 import { lessons } from "@/lib/db/schema/lessons";
 

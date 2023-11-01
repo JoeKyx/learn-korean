@@ -1,11 +1,10 @@
 import { FC, useEffect, useState } from "react";
 
-import { PracticeWords } from "@/lib/db/schema/lessons";
 import { calculateWordLevel } from "@/lib/lessonHelper";
-import { useWordPractice } from "@/components/practice/WordPracticeContext";
 import logger from "@/lib/logger";
 
-type LevelOverviewProps = {};
+import { useWordPractice } from "@/components/practice/WordPracticeContext";
+
 
 const levelColors = [
   "bg-red-500",
@@ -23,7 +22,7 @@ const levelFilteredColors = [
   "bg-green-200",
 ];
 
-const LevelOverview: FC<LevelOverviewProps> = () => {
+const LevelOverview: FC = () => {
   const [currentLevelProgress, setCurrentLevelProgress] = useState([
     0, 0, 0, 0, 0,
   ]);

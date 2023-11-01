@@ -1,6 +1,7 @@
+import { getTests2 } from "@/lib/api/tests2/queries";
+
 import TestsList from "@/components/tests2/TestsList";
 import NewTestsModal from "@/components/tests2/TestsModal";
-import { getTests2 } from "@/lib/api/tests2/queries";
 
 export default async function Tests2() {
   const { tests2 } = await getTests2();  

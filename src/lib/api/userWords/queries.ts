@@ -2,11 +2,10 @@ import { and,eq } from "drizzle-orm";
 
 import { getUserAuth } from "@/lib/auth/utils";
 import { db } from "@/lib/db";
+import { LanguageId } from "@/lib/db/schema/languages";
 import { lessons } from "@/lib/db/schema/lessons";
 import { type UserWordId, userWordIdSchema, userWords } from "@/lib/db/schema/userWords";
 import { words } from "@/lib/db/schema/words";
-import { LanguageId } from "@/lib/db/schema/languages";
-import { userSettings } from "@/lib/db/schema/userSettings";
 
 export const getUserWords = async () => {
   const { session } = await getUserAuth();
@@ -34,6 +33,6 @@ export const getUserWordsByLessonId = async (lessonId: number|string) => {
 export const getAmountOfWordsPractied = async (languageId: LanguageId) => {
   const { session } = await getUserAuth();
   if(!session?.user.id) throw Error("User ID is required")
-  const u = await db.select({words: userWords.wordId}).from(userWords).innerJoin(words, eq(userWords.wordId, words.id)).innerJoin(lessons, eq(lessons.id, words.lessonId)).where(and(eq(userWords.userId, session?.user.id), eq(lessons.languageId, languageId || 1))).groupBy(userWords.wordId);
+  const u = await db.select({words: userWords.wordId}).from(userWords).innerJoin(words, eq(userWords.wordId, words.id)).innerJoin(lessons, eq(lessons.id, words.lessonId)).where(and(eq(userWords.userId, session?.user.id), eq(lessons.languageId, languageId ||1))).groupBy(userWords.wordId);
   return u.length;
 }

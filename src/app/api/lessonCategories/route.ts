@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import {
@@ -8,8 +8,8 @@ import {
   updateLessonCategorie,
 } from "@/lib/api/lessonCategories/mutations";
 import { 
-  lessonCategorieIdSchema,
   insertLessonCategorieParams,
+  lessonCategorieIdSchema,
   updateLessonCategorieParams 
 } from "@/lib/db/schema/lessonCategories";
 

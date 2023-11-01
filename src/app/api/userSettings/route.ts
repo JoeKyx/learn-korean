@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import {
@@ -8,10 +8,9 @@ import {
   updateUserSetting,
 } from "@/lib/api/userSettings/mutations";
 import { 
-  userSettingIdSchema,
   insertUserSettingParams,
-  updateUserSettingParams 
-} from "@/lib/db/schema/userSettings";
+  updateUserSettingParams, 
+  userSettingIdSchema} from "@/lib/db/schema/userSettings";
 
 export async function POST(req: Request) {
   try {

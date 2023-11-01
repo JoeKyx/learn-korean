@@ -1,8 +1,9 @@
-import { date, int, serial, varchar, mysqlTable } from "drizzle-orm/mysql-core";
+import { date, int, mysqlTable,serial, varchar } from "drizzle-orm/mysql-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
-import { languages } from "./languages"
+
 import { getDatesStudies } from "@/lib/api/datesStudied/queries";
+
 
 export const datesStudied = mysqlTable('dates_studied', {
   id: serial("id").primaryKey(),

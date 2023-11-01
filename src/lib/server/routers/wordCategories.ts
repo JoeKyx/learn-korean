@@ -1,11 +1,12 @@
+import { createWordCategorie, deleteWordCategorie, updateWordCategorie } from "@/lib/api/wordCategories/mutations";
 import { getWordCategorieById, getWordCategories } from "@/lib/api/wordCategories/queries";
-import { publicProcedure, router } from "../trpc";
 import {
-  wordCategorieIdSchema,
   insertWordCategorieParams,
   updateWordCategorieParams,
+  wordCategorieIdSchema,
 } from "@/lib/db/schema/wordCategories";
-import { createWordCategorie, deleteWordCategorie, updateWordCategorie } from "@/lib/api/wordCategories/mutations";
+
+import { publicProcedure, router } from "../trpc";
 
 export const wordCategoriesRouter = router({
   getWordCategories: publicProcedure.query(async () => {

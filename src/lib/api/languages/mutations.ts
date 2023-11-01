@@ -1,14 +1,14 @@
-import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
+
+import { db } from "@/lib/db";
 import { 
+  insertLanguageSchema, 
   LanguageId, 
+  languageIdSchema, 
+  languages,
   NewLanguageParams,
   UpdateLanguageParams, 
-  updateLanguageSchema,
-  insertLanguageSchema, 
-  languages,
-  languageIdSchema 
-} from "@/lib/db/schema/languages";
+  updateLanguageSchema} from "@/lib/db/schema/languages";
 
 export const createLanguage = async (language: NewLanguageParams) => {
   const newLanguage = insertLanguageSchema.parse(language);

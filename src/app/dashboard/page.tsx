@@ -1,7 +1,7 @@
 
-import { getUserSettings } from "@/lib/api/userSettings/queries";
-import { Loader2 } from "lucide-react";
 import { redirect } from "next/navigation";
+
+import { getUserSettings } from "@/lib/api/userSettings/queries";
 
 export default async function Dashboard() {
 

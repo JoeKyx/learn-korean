@@ -1,7 +1,10 @@
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
+import { createDatesStudie, updateDatesStudie } from "@/lib/api/datesStudied/mutations";
 import { getUserAuth } from "@/lib/auth/utils";
 import { db } from "@/lib/db";
+import { datesStudied } from "@/lib/db/schema/datesStudied";
+import { lessons } from "@/lib/db/schema/lessons";
 import { 
   insertUserWordSchema, 
   NewUserWordParams,
@@ -10,14 +13,8 @@ import {
   UserWordId, 
   userWordIdSchema, 
   userWords} from "@/lib/db/schema/userWords";
-import logger from "@/lib/logger";
-import { datesStudied } from "@/lib/db/schema/datesStudied";
-import { lessons } from "@/lib/db/schema/lessons";
 import { words } from "@/lib/db/schema/words";
-import { createDatesStudie, updateDatesStudie } from "@/lib/api/datesStudied/mutations";
-import { startOfDay } from "date-fns";
-import startOfToday from "date-fns/startOfToday";
-import { get } from "react-hook-form";
+import logger from "@/lib/logger";
 
 export const createUserWord = async (userWord: NewUserWordParams) => {
   const { session } = await getUserAuth();

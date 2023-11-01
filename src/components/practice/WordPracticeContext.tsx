@@ -148,8 +148,8 @@ const wordPracticeReducer = (
       };
     }
     case 'SHUFFLE_WORDS': {
-      const shuffledAllWords = shuffleArray([...state.allWords]);
-      const shuffledFilteredWords = shuffleArray([...state.filteredWords]);
+      const shuffledAllWords = shuffleArray<typeof state.allWords[number]>([...state.allWords]);
+      const shuffledFilteredWords = shuffleArray<typeof state.allWords[number]>([...state.filteredWords]);
       const randomCurrentWord = shuffledFilteredWords[Math.floor(Math.random() * shuffledFilteredWords.length)];
 
       return {

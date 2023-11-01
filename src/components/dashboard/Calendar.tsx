@@ -1,9 +1,11 @@
 "use client"
-import { HoverCard, HoverCardTrigger } from "@/components/ui/hover-card";
+import { HoverCardContent } from "@radix-ui/react-hover-card";
+import { format,subDays } from 'date-fns';
+
 import { DatesStudied } from "@/lib/db/schema/lessons";
 import { cn } from "@/lib/utils";
-import { HoverCardContent } from "@radix-ui/react-hover-card";
-import { subDays, format } from 'date-fns';
+
+import { HoverCard, HoverCardTrigger } from "@/components/ui/hover-card";
 
 
 export default function Calendar({ datesStudied, className }: { datesStudied: DatesStudied, className?: string, }) {

@@ -1,7 +1,8 @@
-import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
-import { type TestingModelId, testingModelIdSchema, testingModels } from "@/lib/db/schema/testingModels";
+
+import { db } from "@/lib/db";
 import { languages } from "@/lib/db/schema/languages";
+import { type TestingModelId, testingModelIdSchema, testingModels } from "@/lib/db/schema/testingModels";
 
 export const getTestingModels = async () => {
   const t = await db.select({ testingModel: testingModels, language: languages }).from(testingModels).leftJoin(languages, eq(testingModels.languageId, languages.id));

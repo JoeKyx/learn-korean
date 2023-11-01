@@ -1,12 +1,12 @@
 
 import { Suspense } from "react";
 
-import { getAllLessons, getLessonById, getLessons, getPracticeLessons } from "@/lib/api/lessons/queries";
-
-import WordSwiper from "@/components/practice/WordSwiper";
-import { getWordCategories } from "@/lib/api/wordCategories/queries";
-import { WordPracticeProvider } from "@/components/practice/WordPracticeContext";
 import { getLanguages } from "@/lib/api/languages/queries";
+import { getPracticeLessons } from "@/lib/api/lessons/queries";
+import { getWordCategories } from "@/lib/api/wordCategories/queries";
+
+import { WordPracticeProvider } from "@/components/practice/WordPracticeContext";
+import WordSwiper from "@/components/practice/WordSwiper";
 
 export async function generateStaticParams() {
   const languagesRes = await getLanguages();
