@@ -1,21 +1,31 @@
-import { createDatesStudie, deleteDatesStudie, updateDatesStudie } from "@/lib/api/datesStudied/mutations";
-import { getDatesStudieById, getDatesStudiedByLanguage,getDatesStudies } from "@/lib/api/datesStudied/queries";
+import {
+  createDatesStudie,
+  deleteDatesStudie,
+  updateDatesStudie,
+} from '@/lib/api/datesStudied/mutations';
+import {
+  getDatesStudieById,
+  getDatesStudiedByLanguage,
+  getDatesStudies,
+} from '@/lib/api/datesStudied/queries';
 import {
   datesStudieIdSchema,
   insertDatesStudieParams,
   updateDatesStudieParams,
-} from "@/lib/db/schema/datesStudied";
-import { languageIdSchema } from "@/lib/db/schema/languages";
+} from '@/lib/db/schema/datesStudied';
+import { languageIdSchema } from '@/lib/db/schema/languages';
 
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from '../trpc';
 
 export const datesStudiedRouter = router({
   getDatesStudied: publicProcedure.query(async () => {
     return getDatesStudies();
   }),
-  getDatesStudieById: publicProcedure.input(datesStudieIdSchema).query(async ({ input }) => {
-    return getDatesStudieById(input.id);
-  }),
+  getDatesStudieById: publicProcedure
+    .input(datesStudieIdSchema)
+    .query(async ({ input }) => {
+      return getDatesStudieById(input.id);
+    }),
   createDatesStudie: publicProcedure
     .input(insertDatesStudieParams)
     .mutation(async ({ input }) => {

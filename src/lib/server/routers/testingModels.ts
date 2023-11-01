@@ -1,20 +1,29 @@
-import { createTestingModel, deleteTestingModel, updateTestingModel } from "@/lib/api/testingModels/mutations";
-import { getTestingModelById, getTestingModels } from "@/lib/api/testingModels/queries";
+import {
+  createTestingModel,
+  deleteTestingModel,
+  updateTestingModel,
+} from '@/lib/api/testingModels/mutations';
+import {
+  getTestingModelById,
+  getTestingModels,
+} from '@/lib/api/testingModels/queries';
 import {
   insertTestingModelParams,
   testingModelIdSchema,
   updateTestingModelParams,
-} from "@/lib/db/schema/testingModels";
+} from '@/lib/db/schema/testingModels';
 
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from '../trpc';
 
 export const testingModelsRouter = router({
   getTestingModels: publicProcedure.query(async () => {
     return getTestingModels();
   }),
-  getTestingModelById: publicProcedure.input(testingModelIdSchema).query(async ({ input }) => {
-    return getTestingModelById(input.id);
-  }),
+  getTestingModelById: publicProcedure
+    .input(testingModelIdSchema)
+    .query(async ({ input }) => {
+      return getTestingModelById(input.id);
+    }),
   createTestingModel: publicProcedure
     .input(insertTestingModelParams)
     .mutation(async ({ input }) => {

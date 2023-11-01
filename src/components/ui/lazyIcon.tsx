@@ -1,14 +1,14 @@
-"use client"
+'use client';
 import { LucideProps } from 'lucide-react';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 
 interface IconProps extends LucideProps {
   name: keyof typeof dynamicIconImports;
 }
 
 const LazyIcon = ({ name, ...props }: IconProps) => {
-  const LucideIcon = dynamic(dynamicIconImports[name])
+  const LucideIcon = dynamic(dynamicIconImports[name]);
 
   return <LucideIcon {...props} />;
 };

@@ -1,21 +1,31 @@
-import { createUserWord, deleteUserWord, updateUserWord } from "@/lib/api/userWords/mutations";
-import { getAmountOfWordsPractied,getUserWordById, getUserWords } from "@/lib/api/userWords/queries";
-import { languageIdSchema } from "@/lib/db/schema/languages";
+import {
+  createUserWord,
+  deleteUserWord,
+  updateUserWord,
+} from '@/lib/api/userWords/mutations';
+import {
+  getAmountOfWordsPractied,
+  getUserWordById,
+  getUserWords,
+} from '@/lib/api/userWords/queries';
+import { languageIdSchema } from '@/lib/db/schema/languages';
 import {
   insertUserWordParams,
   updateUserWordParams,
   userWordIdSchema,
-} from "@/lib/db/schema/userWords";
+} from '@/lib/db/schema/userWords';
 
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from '../trpc';
 
 export const userWordsRouter = router({
   getUserWords: publicProcedure.query(async () => {
     return getUserWords();
   }),
-  getUserWordById: publicProcedure.input(userWordIdSchema).query(async ({ input }) => {
-    return getUserWordById(input.id);
-  }),
+  getUserWordById: publicProcedure
+    .input(userWordIdSchema)
+    .query(async ({ input }) => {
+      return getUserWordById(input.id);
+    }),
   createUserWord: publicProcedure
     .input(insertUserWordParams)
     .mutation(async ({ input }) => {
@@ -31,8 +41,9 @@ export const userWordsRouter = router({
     .mutation(async ({ input }) => {
       return deleteUserWord(input.id);
     }),
-    getAmountOfWordsPracticed: publicProcedure.input(languageIdSchema).query(async ({input}) => {
+  getAmountOfWordsPracticed: publicProcedure
+    .input(languageIdSchema)
+    .query(async ({ input }) => {
       return getAmountOfWordsPractied(input.id);
-    
-    })
+    }),
 });

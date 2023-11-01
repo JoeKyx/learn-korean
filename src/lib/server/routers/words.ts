@@ -1,12 +1,12 @@
-import { createWord, deleteWord, updateWord } from "@/lib/api/words/mutations";
-import { getWordById, getWords } from "@/lib/api/words/queries";
+import { createWord, deleteWord, updateWord } from '@/lib/api/words/mutations';
+import { getWordById, getWords } from '@/lib/api/words/queries';
 import {
   insertWordParams,
   updateWordParams,
   wordIdSchema,
-} from "@/lib/db/schema/words";
+} from '@/lib/db/schema/words';
 
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from '../trpc';
 
 export const wordsRouter = router({
   getWords: publicProcedure.query(async () => {

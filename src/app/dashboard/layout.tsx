@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import { getLanguages } from '@/lib/api/languages/queries';
 import { getLessonsWithCategory } from '@/lib/api/lessons/queries';
@@ -17,15 +17,21 @@ export default async function layout({
 
   const userSettingsData = getUserSettings();
 
-  const [lessons, languages, userSettings] = await Promise.all([lessonsData, languagesData, userSettingsData]);
+  const [lessons, languages, userSettings] = await Promise.all([
+    lessonsData,
+    languagesData,
+    userSettingsData,
+  ]);
 
   return (
     <div className='w-screen h-screen'>
-
-      <SettingsProvider availableLanguages={languages.languages} userSettings={userSettings.userSettings}>
+      <SettingsProvider
+        availableLanguages={languages.languages}
+        userSettings={userSettings.userSettings}
+      >
         <DashboardNavbar lessons={lessons.categories} />
         {children}
       </SettingsProvider>
     </div>
-  )
+  );
 }

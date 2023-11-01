@@ -1,20 +1,29 @@
-import { createWordCategorie, deleteWordCategorie, updateWordCategorie } from "@/lib/api/wordCategories/mutations";
-import { getWordCategorieById, getWordCategories } from "@/lib/api/wordCategories/queries";
+import {
+  createWordCategorie,
+  deleteWordCategorie,
+  updateWordCategorie,
+} from '@/lib/api/wordCategories/mutations';
+import {
+  getWordCategorieById,
+  getWordCategories,
+} from '@/lib/api/wordCategories/queries';
 import {
   insertWordCategorieParams,
   updateWordCategorieParams,
   wordCategorieIdSchema,
-} from "@/lib/db/schema/wordCategories";
+} from '@/lib/db/schema/wordCategories';
 
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from '../trpc';
 
 export const wordCategoriesRouter = router({
   getWordCategories: publicProcedure.query(async () => {
     return getWordCategories();
   }),
-  getWordCategorieById: publicProcedure.input(wordCategorieIdSchema).query(async ({ input }) => {
-    return getWordCategorieById(input.id);
-  }),
+  getWordCategorieById: publicProcedure
+    .input(wordCategorieIdSchema)
+    .query(async ({ input }) => {
+      return getWordCategorieById(input.id);
+    }),
   createWordCategorie: publicProcedure
     .input(insertWordCategorieParams)
     .mutation(async ({ input }) => {

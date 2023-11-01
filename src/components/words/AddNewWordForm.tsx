@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-import { LessonId } from "@/lib/db/schema/lessons";
-import { insertWordParams, NewWordParams, Word } from "@/lib/db/schema/words";
-import logger from "@/lib/logger";
-import { trpc } from "@/lib/trpc/client";
+import { LessonId } from '@/lib/db/schema/lessons';
+import { insertWordParams, NewWordParams, Word } from '@/lib/db/schema/words';
+import logger from '@/lib/logger';
+import { trpc } from '@/lib/trpc/client';
 
-import Button from "@/components/buttons/Button";
-import { useSettings } from "@/components/context/settingsContext";
+import Button from '@/components/buttons/Button';
+import { useSettings } from '@/components/context/settingsContext';
 import {
   Form,
   FormControl,
@@ -19,16 +19,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
 const WordForm = ({
   word,
   lessonId,
-  closeModal
+  closeModal,
 }: {
   word?: Word;
-  lessonId: LessonId
+  lessonId: LessonId;
   closeModal?: () => void;
 }) => {
   const { toast } = useToast();
@@ -45,19 +45,18 @@ const WordForm = ({
     // errors locally but not in production
     resolver: zodResolver(insertWordParams),
     defaultValues: word ?? {
-      wordEng: "",
-      wordDe: "",
-      wordKor: "",
+      wordEng: '',
+      wordDe: '',
+      wordKor: '',
       level: 1,
       userId: userSettings.userId,
-      pronunciation: "",
+      pronunciation: '',
       lessonId: lessonId,
-      hint: null
-
+      hint: null,
     },
   });
 
-  const onSuccess = (action: "create" | "update" | "delete") => {
+  const onSuccess = (action: 'create' | 'update' | 'delete') => {
     utils.lessons.getLessons.invalidate();
     router.refresh();
     if (closeModal) {
@@ -66,27 +65,27 @@ const WordForm = ({
     toast({
       title: 'Success',
       description: `Word ${action}d!`,
-      variant: "default",
+      variant: 'default',
     });
   };
 
   const { mutate: createWord, isLoading: isCreating } =
     trpc.words.createWord.useMutation({
-      onSuccess: () => onSuccess("create"),
+      onSuccess: () => onSuccess('create'),
     });
 
   const { mutate: updateWord, isLoading: isUpdating } =
     trpc.words.updateWord.useMutation({
-      onSuccess: () => onSuccess("update"),
+      onSuccess: () => onSuccess('update'),
     });
 
   const { mutate: deleteWord, isLoading: isDeleting } =
     trpc.words.deleteWord.useMutation({
-      onSuccess: () => onSuccess("delete"),
+      onSuccess: () => onSuccess('delete'),
     });
 
   const handleSubmit = (values: NewWordParams) => {
-    logger(values, "new Word: ")
+    logger(values, 'new Word: ');
 
     if (editing) {
       updateWord({ ...values, id: word.id });
@@ -95,80 +94,78 @@ const WordForm = ({
     }
   };
 
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-8'>
         <FormField
           control={form.control}
-          name="wordEng"
-          render={({ field }) => (<FormItem>
-            <FormLabel>Word (English)</FormLabel>
-            <FormControl>
-              <Input {...field} />
-            </FormControl>
+          name='wordEng'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Word (English)</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
 
-            <FormMessage />
-          </FormItem>
+              <FormMessage />
+            </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          name="wordDe"
-          render={({ field }) => (<FormItem>
-            <FormLabel>Word (German)</FormLabel>
-            <FormControl>
-              <Input {...field} value={field.value ?? ''} />
+          name='wordDe'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Word (German)</FormLabel>
+              <FormControl>
+                <Input {...field} value={field.value ?? ''} />
+              </FormControl>
 
-            </FormControl>
-
-            <FormMessage />
-          </FormItem>
+              <FormMessage />
+            </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          name="wordKor"
-          render={({ field }) => (<FormItem>
-            <FormLabel>Word</FormLabel>
-            <FormControl>
-              <Input {...field} />
-            </FormControl>
+          name='wordKor'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Word</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
 
-            <FormMessage />
-          </FormItem>
+              <FormMessage />
+            </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          name="pronunciation"
-          render={({ field }) => (<FormItem>
-            <FormLabel>Pronounciation</FormLabel>
-            <FormControl>
-              <Input {...field} value={field.value ?? ''} />
+          name='pronunciation'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Pronounciation</FormLabel>
+              <FormControl>
+                <Input {...field} value={field.value ?? ''} />
+              </FormControl>
 
-            </FormControl>
-
-            <FormMessage />
-          </FormItem>
+              <FormMessage />
+            </FormItem>
           )}
         />
 
         <Button
-          type="submit"
-          className="mr-1"
+          type='submit'
+          className='mr-1'
           disabled={isCreating || isUpdating}
         >
           {editing
-            ? `Sav${isUpdating ? "ing..." : "e"}`
-            : `Creat${isCreating ? "ing..." : "e"}`}
+            ? `Sav${isUpdating ? 'ing...' : 'e'}`
+            : `Creat${isCreating ? 'ing...' : 'e'}`}
         </Button>
         {editing ? (
-          <Button
-            type="button"
-            onClick={() => deleteWord(word)}
-          >
-            Delet{isDeleting ? "ing..." : "e"}
+          <Button type='button' onClick={() => deleteWord(word)}>
+            Delet{isDeleting ? 'ing...' : 'e'}
           </Button>
         ) : null}
       </form>

@@ -1,10 +1,10 @@
-import { env } from "@/lib/env.mjs";
+import { env } from '@/lib/env.mjs';
 function getBaseUrl() {
-  if (typeof window !== "undefined") return "";
+  if (typeof window !== 'undefined') return '';
   if (env.VERCEL_URL) return `https://${env.VERCEL_URL}`;
-  return "http://localhost:3000";
+  return 'http://localhost:3000';
 }
 
 export function getUrl() {
-  return getBaseUrl() + "/api/trpc";
+  return getBaseUrl() + '/api/trpc';
 }

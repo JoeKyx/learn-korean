@@ -1,12 +1,12 @@
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider } from '@clerk/nextjs';
 import { Metadata } from 'next';
 import * as React from 'react';
 
 import '@/styles/globals.css';
 
-import TrpcProvider from "@/lib/trpc/Provider";
+import TrpcProvider from '@/lib/trpc/Provider';
 
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from '@/components/ui/toaster';
 
 import { siteConfig } from '@/constant/config';
 
@@ -58,9 +58,10 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body className="bg-sky-100">
+      <body className='bg-sky-100'>
         <ClerkProvider>
-          <TrpcProvider>{children}
+          <TrpcProvider>
+            {children}
             <Toaster />
           </TrpcProvider>
         </ClerkProvider>

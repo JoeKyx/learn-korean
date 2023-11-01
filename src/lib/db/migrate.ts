@@ -1,23 +1,20 @@
-import { connect } from "@planetscale/database";
-import { drizzle } from "drizzle-orm/planetscale-serverless";
-import { migrate } from "drizzle-orm/planetscale-serverless/migrator";
+import { connect } from '@planetscale/database';
+import { drizzle } from 'drizzle-orm/planetscale-serverless';
+import { migrate } from 'drizzle-orm/planetscale-serverless/migrator';
 
-import { env } from "@/lib/env.mjs";
-import logger from "@/lib/logger";
-
+import { env } from '@/lib/env.mjs';
+import logger from '@/lib/logger';
 
 const runMigrate = async () => {
   if (!env.DATABASE_URL) {
-    throw new Error("DATABASE_URL is not defined");
+    throw new Error('DATABASE_URL is not defined');
   }
 
-  
-const connection = connect({ url: env.DATABASE_URL });
- 
-const db = drizzle(connection);
+  const connection = connect({ url: env.DATABASE_URL });
 
+  const db = drizzle(connection);
 
-  logger("⏳ Running migrations...");
+  logger('⏳ Running migrations...');
 
   const start = Date.now();
 
@@ -25,13 +22,13 @@ const db = drizzle(connection);
 
   const end = Date.now();
 
-  logger("✅ Migrations completed in "+ (end - start).toString()+ " ms");
+  logger('✅ Migrations completed in ' + (end - start).toString() + ' ms');
 
   process.exit(0);
 };
 
 runMigrate().catch((err) => {
-  logger("❌ Migration failed");
+  logger('❌ Migration failed');
   logger(err);
   process.exit(1);
 });

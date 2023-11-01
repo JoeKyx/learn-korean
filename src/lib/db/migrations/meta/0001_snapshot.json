@@ -34,9 +34,7 @@
       "compositePrimaryKeys": {
         "computers_id": {
           "name": "computers_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -78,9 +76,7 @@
       "compositePrimaryKeys": {
         "lessons_id": {
           "name": "lessons_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -129,9 +125,7 @@
       "compositePrimaryKeys": {
         "user_words_id": {
           "name": "user_words_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -192,9 +186,7 @@
       "indexes": {
         "word_kor_idx": {
           "name": "word_kor_idx",
-          "columns": [
-            "word_kor"
-          ],
+          "columns": ["word_kor"],
           "isUnique": true
         }
       },
@@ -202,9 +194,7 @@
       "compositePrimaryKeys": {
         "words_id": {
           "name": "words_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}

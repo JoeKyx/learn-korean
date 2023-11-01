@@ -1,5 +1,5 @@
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 
 type AuthSession = {
   session: {
@@ -28,5 +28,5 @@ export const getUserAuth = async () => {
 
 export const checkAuth = async () => {
   const { userId } = auth();
-  if (!userId) redirect("/sign-in");
+  if (!userId) redirect('/sign-in');
 };

@@ -1,22 +1,23 @@
-"use client";
-import { useAuth } from "@clerk/nextjs";
-import { QuestionMarkIcon } from "@radix-ui/react-icons";
-import { Banana, Bird, Fish, Heart, Zap } from "lucide-react";
-import { LucideIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useSwipeable } from "react-swipeable";
+'use client';
+import { useAuth } from '@clerk/nextjs';
+import { QuestionMarkIcon } from '@radix-ui/react-icons';
+import { Banana, Bird, Fish, Heart, Zap } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 
-import { WordCategorie, WordCategorieId } from "@/lib/db/schema/wordCategories";
-import { calculateWordLevel } from "@/lib/lessonHelper";
-import logger from "@/lib/logger";
-import { trpc } from "@/lib/trpc/client";
+import { WordCategorie, WordCategorieId } from '@/lib/db/schema/wordCategories';
+import { calculateWordLevel } from '@/lib/lessonHelper';
+import logger from '@/lib/logger';
+import { trpc } from '@/lib/trpc/client';
+import { handleError } from '@/lib/utils';
 
-import Button from "@/components/buttons/Button";
-import CategoryOverview from "@/components/practice/CategoryOverview";
-import LessonProgress from "@/components/practice/LessonProgress";
-import LevelOverview from "@/components/practice/LevelOverview";
-import { ModeType } from "@/components/practice/WordPracticeContext";
-import { useWordPractice } from "@/components/practice/WordPracticeContext";
+import Button from '@/components/buttons/Button';
+import CategoryOverview from '@/components/practice/CategoryOverview';
+import LessonProgress from '@/components/practice/LessonProgress';
+import LevelOverview from '@/components/practice/LevelOverview';
+import { ModeType } from '@/components/practice/WordPracticeContext';
+import { useWordPractice } from '@/components/practice/WordPracticeContext';
 
 export type IconType = {
   name: string;
@@ -25,23 +26,23 @@ export type IconType = {
 
 export const icons: IconType[] = [
   {
-    name: "Heart",
+    name: 'Heart',
     icon: Heart,
   },
   {
-    name: "Fish",
+    name: 'Fish',
     icon: Fish,
   },
   {
-    name: "Banana",
+    name: 'Banana',
     icon: Banana,
   },
   {
-    name: "Zap",
+    name: 'Zap',
     icon: Zap,
   },
   {
-    name: "Bird",
+    name: 'Bird',
     icon: Bird,
   },
 ];
@@ -49,7 +50,7 @@ export const icons: IconType[] = [
 export default function WordSwiper() {
   const { userId } = useAuth();
 
-  const [status, setStatus] = useState("");
+  const [status, _setStatus] = useState('');
   const [swipeDelta, setSwipeDelta] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
 
@@ -59,13 +60,13 @@ export default function WordSwiper() {
   const [wasIncorrectSwipe, setWasIncorrectSwipe] = useState(false);
 
   const [successSound, setSuccessSound] = useState<HTMLAudioElement | null>(
-    null,
+    null
   );
 
   const animationLength = 500;
 
   useEffect(() => {
-    const audio = new Audio("/sounds/success.mp3");
+    const audio = new Audio('/sounds/success.mp3');
     audio.volume = 0.5;
     setSuccessSound(audio);
   }, []);
@@ -105,24 +106,23 @@ export default function WordSwiper() {
     updateThreshold();
 
     // Listen for window resize and update threshold accordingly
-    window.addEventListener("resize", updateThreshold);
+    window.addEventListener('resize', updateThreshold);
 
     // Cleanup the listener when the component unmounts
-    return () => window.removeEventListener("resize", updateThreshold);
+    return () => window.removeEventListener('resize', updateThreshold);
   }, []);
 
   const practiceContext = useWordPractice();
 
-  const { currentWord, mode, wordCategories, noWords } =
-    practiceContext.state;
+  const { currentWord, mode, wordCategories, noWords } = practiceContext.state;
 
-  const {
-    mutate: createUserWord,
-    error,
-  } = trpc.userWords.createUserWord.useMutation({});
+  const { mutate: createUserWord, error } =
+    trpc.userWords.createUserWord.useMutation({});
 
   const handleSwipe = (success: boolean, wasSwipe: boolean) => {
-    let newLevel = currentWord ? calculateWordLevel(currentWord) + (success ? 1 : -1) : 1;
+    let newLevel = currentWord
+      ? calculateWordLevel(currentWord) + (success ? 1 : -1)
+      : 1;
     if (newLevel < 1) {
       newLevel = 1;
     }
@@ -132,7 +132,7 @@ export default function WordSwiper() {
     if (success) {
       if (successSound) {
         successSound.play().catch((error) => {
-          console.error("Audio play failed:", error);
+          handleError(error);
         });
       }
       // We check if the user swiped or clicked the button
@@ -156,33 +156,29 @@ export default function WordSwiper() {
       // Wait until the animation is finished before updating the word
       setTimeout(() => {
         practiceContext.dispatch({
-          type: "SWIPE_WORD",
-          payload: { success, userId: userId || "" },
+          type: 'SWIPE_WORD',
+          payload: { success, userId: userId || '' },
         });
       }, animationLength);
     }
   };
 
-  const {
-    mutate: deleteWordUserCategoryByCategoryId,
-  } = trpc.wordUserCategories.deleteWordUserCategoryByCategoryId.useMutation(
-    {},
-  );
+  const { mutate: deleteWordUserCategoryByCategoryId } =
+    trpc.wordUserCategories.deleteWordUserCategoryByCategoryId.useMutation({});
 
-  const {
-    mutate: createWordUserCategory,
-  } = trpc.wordUserCategories.createWordUserCategorie.useMutation({});
+  const { mutate: createWordUserCategory } =
+    trpc.wordUserCategories.createWordUserCategorie.useMutation({});
 
   const handleCategoryClick = (categoryId: WordCategorieId) => {
-    logger(categoryId, "Clicked Category");
+    logger(categoryId, 'Clicked Category');
     if (
       currentWord?.categories.some(
-        (currentCategory) => currentCategory.wordcategorieId === categoryId,
+        (currentCategory) => currentCategory.wordcategorieId === categoryId
       )
     ) {
-      logger(categoryId, "Removing Category from Word");
+      logger(categoryId, 'Removing Category from Word');
       practiceContext.dispatch({
-        type: "REMOVE_CATEGORY_FROM_WORD",
+        type: 'REMOVE_CATEGORY_FROM_WORD',
         payload: {
           categoryId: categoryId,
           wordId: currentWord.id,
@@ -193,12 +189,12 @@ export default function WordSwiper() {
         wordId: currentWord.id,
       });
     } else if (currentWord) {
-      logger(categoryId, "Adding Category to Word");
+      logger(categoryId, 'Adding Category to Word');
       practiceContext.dispatch({
-        type: "ADD_CATEGORY_TO_WORD",
+        type: 'ADD_CATEGORY_TO_WORD',
         payload: {
           categoryId: categoryId,
-          userId: userId || "",
+          userId: userId || '',
           wordId: currentWord.id,
         },
       });
@@ -230,7 +226,7 @@ export default function WordSwiper() {
       setIsSwiping(true);
       setSwipeDelta(event.deltaX);
     },
-    onSwiped: (event) => {
+    onSwiped: () => {
       setIsSwiping(false);
       setSwipeDelta(0);
     },
@@ -238,13 +234,16 @@ export default function WordSwiper() {
 
   const cardStyle = {
     transform: isSwiping ? `translateX(${swipeDelta}px)` : undefined,
-    transition: isSwiping ? "none" : "transform 0.3s ease",
+    transition: isSwiping ? 'none' : 'transform 0.3s ease',
   };
 
   const CategoryIcon = ({
     category,
     isSelected,
-  }: { category: WordCategorie; isSelected: boolean }) => {
+  }: {
+    category: WordCategorie;
+    isSelected: boolean;
+  }) => {
     const IconComponent =
       icons.find((icon) => icon.name === category.name)?.icon ||
       QuestionMarkIcon;
@@ -252,7 +251,7 @@ export default function WordSwiper() {
     return (
       <IconComponent
         key={category.id}
-        className="text-neutral-700 hover:fill-neutral-200 fill-blue-500"
+        className='text-neutral-700 hover:fill-neutral-200 fill-blue-500'
         style={isSelected ? { fill: category.color } : {}}
         size={24}
         onClick={() => handleCategoryClick(category.id)}
@@ -261,7 +260,7 @@ export default function WordSwiper() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-5" >
+    <div className='flex flex-col items-center justify-center gap-5'>
       <CategoryOverview />
       <LevelOverview />
       <LessonProgress />
@@ -271,53 +270,102 @@ export default function WordSwiper() {
         className={`my-auto w-96 h-52 flex flex-col items-center rounded-md shadow-md 
     ${wasCorrectSwipe ? 'card-correct-swipe' : ''}
     ${wasIncorrectSwipe ? 'card-incorrect-swipe' : ''}
-    ${swipeDelta >= swipeThreshold ? 'bg-green-500 bg-opacity-50' :
-            swipeDelta <= -swipeThreshold ? 'bg-red-500 bg-opacity-50' :
-              'bg-yellow-300'}`}
+    ${
+      swipeDelta >= swipeThreshold
+        ? 'bg-green-500 bg-opacity-50'
+        : swipeDelta <= -swipeThreshold
+        ? 'bg-red-500 bg-opacity-50'
+        : 'bg-yellow-300'
+    }`}
         {...swipeHandlers}
         style={cardStyle}
       >
-        {noWords ? <span>No words with selected filters</span> :
-          (
-            <>
-              <div className="flex justify-between w-full p-2">
-                <div className="flex gap-4">
-                  {wordCategories.map((category) => {
-                    return (
-                      <CategoryIcon category={category} isSelected={currentWord?.categories.some(wordCat => wordCat.wordcategorieId === category.id) || false} key={category.id} />
-                    )
-                  })}
-                </div>
-                <span className="ml-auto">{currentWord ? calculateWordLevel(currentWord) : 1} - {mode}</span>
-              </div>
-
-              <div className="pt-14">
-                <span className={`${currentWord?.wordEng.length || 0 > 10 && mode === "english" ? 'text-xl' : 'text-3xl'} font-bold justify-self-center cursor-pointer`}
-                  onClick={
-                    () => {
-                      let newMode: ModeType
-                      if (mode === "english") {
-                        newMode = "foreign"
-                      } else {
-                        newMode = "english"
+        {noWords ? (
+          <span>No words with selected filters</span>
+        ) : (
+          <>
+            <div className='flex justify-between w-full p-2'>
+              <div className='flex gap-4'>
+                {wordCategories.map((category) => {
+                  return (
+                    <CategoryIcon
+                      category={category}
+                      isSelected={
+                        currentWord?.categories.some(
+                          (wordCat) => wordCat.wordcategorieId === category.id
+                        ) || false
                       }
-                      practiceContext.dispatch({ type: 'SET_MODE', payload: { mode: newMode } })
-                    }
-                  }
-                >{currentWord?.wordEng && currentWord?.wordKor ? (mode === 'english' ? (currentWord.wordDe || currentWord.wordEng) : currentWord.wordKor) : 'Something went wrong'}</span>
-                {currentWord?.wordEng !== currentWord?.pronunciation && mode === 'english' ? <span> ({currentWord?.pronunciation})</span> : null}
+                      key={category.id}
+                    />
+                  );
+                })}
               </div>
-              <div className="flex w-full gap-4 mt-auto justify-between">
-                <Button variant="ghost" className="text-red-500" onClick={() => handleSwipe(false, false)}>Incorrect</Button>
-                <Button variant="ghost" className="text-green-500" onClick={() => handleSwipe(true, false)}>Correct</Button>
-              </div>
-              <div>
-                {status}
-              </div>
+              <span className='ml-auto'>
+                {currentWord ? calculateWordLevel(currentWord) : 1} - {mode}
+              </span>
+            </div>
 
-              <Button variant="light" className="w-full items-center justify-center text-center flex" onClick={() => practiceContext.dispatch({ type: 'SHUFFLE_WORDS' })}>Shuffle Cards</Button>
-            </>)}
+            <div className='pt-14'>
+              <span
+                className={`${
+                  currentWord?.wordEng.length || (0 > 10 && mode === 'english')
+                    ? 'text-xl'
+                    : 'text-3xl'
+                } font-bold justify-self-center cursor-pointer`}
+                onClick={() => {
+                  let newMode: ModeType;
+                  if (mode === 'english') {
+                    newMode = 'foreign';
+                  } else {
+                    newMode = 'english';
+                  }
+                  practiceContext.dispatch({
+                    type: 'SET_MODE',
+                    payload: { mode: newMode },
+                  });
+                }}
+              >
+                {currentWord?.wordEng && currentWord?.wordKor
+                  ? mode === 'english'
+                    ? currentWord.wordDe || currentWord.wordEng
+                    : currentWord.wordKor
+                  : 'Something went wrong'}
+              </span>
+              {currentWord?.wordEng !== currentWord?.pronunciation &&
+              mode === 'english' ? (
+                <span> ({currentWord?.pronunciation})</span>
+              ) : null}
+            </div>
+            <div className='flex w-full gap-4 mt-auto justify-between'>
+              <Button
+                variant='ghost'
+                className='text-red-500'
+                onClick={() => handleSwipe(false, false)}
+              >
+                Incorrect
+              </Button>
+              <Button
+                variant='ghost'
+                className='text-green-500'
+                onClick={() => handleSwipe(true, false)}
+              >
+                Correct
+              </Button>
+            </div>
+            <div>{status}</div>
+
+            <Button
+              variant='light'
+              className='w-full items-center justify-center text-center flex'
+              onClick={() =>
+                practiceContext.dispatch({ type: 'SHUFFLE_WORDS' })
+              }
+            >
+              Shuffle Cards
+            </Button>
+          </>
+        )}
       </div>
-    </div >
-  )
+    </div>
+  );
 }

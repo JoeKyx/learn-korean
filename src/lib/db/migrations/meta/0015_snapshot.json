@@ -34,9 +34,7 @@
       "compositePrimaryKeys": {
         "computers_id": {
           "name": "computers_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -106,9 +104,7 @@
       "compositePrimaryKeys": {
         "dates_studied_id": {
           "name": "dates_studied_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -143,9 +139,7 @@
       "compositePrimaryKeys": {
         "languages_id": {
           "name": "languages_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -208,9 +202,7 @@
       "compositePrimaryKeys": {
         "lessons_id": {
           "name": "lessons_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -259,9 +251,7 @@
       "compositePrimaryKeys": {
         "testing_models_id": {
           "name": "testing_models_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -289,9 +279,7 @@
       "compositePrimaryKeys": {
         "tests_id": {
           "name": "tests_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -319,9 +307,7 @@
       "compositePrimaryKeys": {
         "tests2_id": {
           "name": "tests2_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -349,9 +335,7 @@
       "compositePrimaryKeys": {
         "user_settings_user_id": {
           "name": "user_settings_user_id",
-          "columns": [
-            "user_id"
-          ]
+          "columns": ["user_id"]
         }
       },
       "uniqueConstraints": {}
@@ -407,9 +391,7 @@
       "compositePrimaryKeys": {
         "user_words_id": {
           "name": "user_words_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -451,9 +433,7 @@
       "compositePrimaryKeys": {
         "word_categories_id": {
           "name": "word_categories_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -502,9 +482,7 @@
       "compositePrimaryKeys": {
         "word_user_categories_id": {
           "name": "word_user_categories_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -572,9 +550,7 @@
       "indexes": {
         "word_kor_idx": {
           "name": "word_kor_idx",
-          "columns": [
-            "word_kor"
-          ],
+          "columns": ["word_kor"],
           "isUnique": true
         }
       },
@@ -582,9 +558,7 @@
       "compositePrimaryKeys": {
         "words_id": {
           "name": "words_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}

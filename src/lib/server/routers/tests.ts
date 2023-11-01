@@ -1,12 +1,12 @@
-import { createTest, deleteTest, updateTest } from "@/lib/api/tests/mutations";
-import { getTestById, getTests } from "@/lib/api/tests/queries";
+import { createTest, deleteTest, updateTest } from '@/lib/api/tests/mutations';
+import { getTestById, getTests } from '@/lib/api/tests/queries';
 import {
   insertTestParams,
   testIdSchema,
   updateTestParams,
-} from "@/lib/db/schema/tests";
+} from '@/lib/db/schema/tests';
 
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from '../trpc';
 
 export const testsRouter = router({
   getTests: publicProcedure.query(async () => {

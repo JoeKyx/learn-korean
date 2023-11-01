@@ -1,11 +1,6 @@
 {
   "hasSrc": true,
-  "packages": [
-    "drizzle",
-    "clerk",
-    "trpc",
-    "shadcn-ui"
-  ],
+  "packages": ["drizzle", "clerk", "trpc", "shadcn-ui"],
   "preferredPackageManager": "yarn",
   "rootPath": "src/",
   "driver": "mysql",

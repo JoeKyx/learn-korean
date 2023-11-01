@@ -1,8 +1,8 @@
-import { initTRPC } from "@trpc/server";
-import superjson from "superjson";
-import { ZodError } from "zod";
+import { initTRPC } from '@trpc/server';
+import superjson from 'superjson';
+import { ZodError } from 'zod';
 
-import { Context } from "../trpc/context";
+import { Context } from '../trpc/context';
 
 /**
  * Initialization of tRPC backend
@@ -17,7 +17,7 @@ const t = initTRPC.context<Context>().create({
       data: {
         ...shape.data,
         zodError:
-          error.code === "BAD_REQUEST" && error.cause instanceof ZodError
+          error.code === 'BAD_REQUEST' && error.cause instanceof ZodError
             ? error.cause.flatten()
             : null,
       },

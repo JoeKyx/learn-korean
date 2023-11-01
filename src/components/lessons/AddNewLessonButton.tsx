@@ -1,6 +1,6 @@
-"use client"
+'use client';
 import { Plus } from 'lucide-react';
-import { FC, forwardRef } from 'react'
+import { FC, forwardRef } from 'react';
 import { HTMLAttributes } from 'react';
 import { useState } from 'react';
 
@@ -14,14 +14,17 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
+} from '../ui/dialog';
 
 type AddNewLessonButtonProps = HTMLAttributes<HTMLButtonElement>;
 
-const AddNewLessonButton: FC<AddNewLessonButtonProps> = forwardRef<HTMLButtonElement, AddNewLessonButtonProps>((props, ref) => {
+const AddNewLessonButton: FC<AddNewLessonButtonProps> = forwardRef<
+  HTMLButtonElement,
+  AddNewLessonButtonProps
+>((props, ref) => {
   const { className, ...rest } = props;
 
-  const [open, setOpen] = useState(false);
+  const [_open, setOpen] = useState(false);
   const { language } = useSettings();
   const closeModal = () => setOpen(false);
 
@@ -33,10 +36,10 @@ const AddNewLessonButton: FC<AddNewLessonButtonProps> = forwardRef<HTMLButtonEle
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader className="px-5 pt-5">
+        <DialogHeader className='px-5 pt-5'>
           <DialogTitle>Add New Lesson</DialogTitle>
         </DialogHeader>
-        <div className="px-5 pb-5">
+        <div className='px-5 pb-5'>
           <AddNewLessonForm closeModal={closeModal} languageId={language.id} />
         </div>
       </DialogContent>

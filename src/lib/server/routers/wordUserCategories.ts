@@ -1,22 +1,32 @@
-import { createWordUserCategorie, deleteWordUserCategorie, deleteWordUserCategoryByCategoryId, updateWordUserCategorie } from "@/lib/api/wordUserCategories/mutations";
-import { getWordUserCategorieById, getWordUserCategories } from "@/lib/api/wordUserCategories/queries";
+import {
+  createWordUserCategorie,
+  deleteWordUserCategorie,
+  deleteWordUserCategoryByCategoryId,
+  updateWordUserCategorie,
+} from '@/lib/api/wordUserCategories/mutations';
+import {
+  getWordUserCategorieById,
+  getWordUserCategories,
+} from '@/lib/api/wordUserCategories/queries';
 import {
   deleteWordUserCategoryParams,
   insertWordUserCategorieParams,
   updateWordUserCategorieParams,
   wordUserCategorieIdSchema,
-} from "@/lib/db/schema/wordUserCategories";
-import logger from "@/lib/logger";
+} from '@/lib/db/schema/wordUserCategories';
+import logger from '@/lib/logger';
 
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from '../trpc';
 
 export const wordUserCategoriesRouter = router({
   getWordUserCategories: publicProcedure.query(async () => {
     return getWordUserCategories();
   }),
-  getWordUserCategorieById: publicProcedure.input(wordUserCategorieIdSchema).query(async ({ input }) => {
-    return getWordUserCategorieById(input.id);
-  }),
+  getWordUserCategorieById: publicProcedure
+    .input(wordUserCategorieIdSchema)
+    .query(async ({ input }) => {
+      return getWordUserCategorieById(input.id);
+    }),
   createWordUserCategorie: publicProcedure
     .input(insertWordUserCategorieParams)
     .mutation(async ({ input }) => {
@@ -35,7 +45,7 @@ export const wordUserCategoriesRouter = router({
   deleteWordUserCategoryByCategoryId: publicProcedure
     .input(deleteWordUserCategoryParams)
     .mutation(async ({ input }) => {
-      logger(input, 'in Mutation Router')
+      logger(input, 'in Mutation Router');
       return deleteWordUserCategoryByCategoryId(input);
     }),
 });

@@ -1,11 +1,16 @@
-import { createUserSetting, deleteUserSetting, updateUserSetting, upsertUserSetting } from "@/lib/api/userSettings/mutations";
-import {  getUserSettings } from "@/lib/api/userSettings/queries";
+import {
+  createUserSetting,
+  deleteUserSetting,
+  updateUserSetting,
+  upsertUserSetting,
+} from '@/lib/api/userSettings/mutations';
+import { getUserSettings } from '@/lib/api/userSettings/queries';
 import {
   insertUserSettingParams,
   updateUserSettingParams,
-} from "@/lib/db/schema/userSettings";
+} from '@/lib/db/schema/userSettings';
 
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from '../trpc';
 
 export const userSettingsRouter = router({
   getUserSettings: publicProcedure.query(async () => {
@@ -26,8 +31,7 @@ export const userSettingsRouter = router({
     .mutation(async ({ input }) => {
       return upsertUserSetting(input);
     }),
-  deleteUserSetting: publicProcedure
-    .mutation(async () => {
-      return deleteUserSetting();
-    }),
+  deleteUserSetting: publicProcedure.mutation(async () => {
+    return deleteUserSetting();
+  }),
 });

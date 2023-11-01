@@ -1,7 +1,7 @@
-import { eq } from "drizzle-orm";
+import { eq } from 'drizzle-orm';
 
-import { db } from "@/lib/db";
-import { type TestId, testIdSchema, tests } from "@/lib/db/schema/tests";
+import { db } from '@/lib/db';
+import { type TestId, testIdSchema, tests } from '@/lib/db/schema/tests';
 
 export const getTests = async () => {
   const t = await db.select().from(tests);
@@ -13,4 +13,3 @@ export const getTestById = async (id: TestId) => {
   const [t] = await db.select().from(tests).where(eq(tests.id, testId));
   return { test: t };
 };
-

@@ -1,20 +1,26 @@
-import { createLanguage, deleteLanguage, updateLanguage } from "@/lib/api/languages/mutations";
-import { getLanguageById, getLanguages } from "@/lib/api/languages/queries";
+import {
+  createLanguage,
+  deleteLanguage,
+  updateLanguage,
+} from '@/lib/api/languages/mutations';
+import { getLanguageById, getLanguages } from '@/lib/api/languages/queries';
 import {
   insertLanguageParams,
   languageIdSchema,
   updateLanguageParams,
-} from "@/lib/db/schema/languages";
+} from '@/lib/db/schema/languages';
 
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from '../trpc';
 
 export const languagesRouter = router({
   getLanguages: publicProcedure.query(async () => {
     return getLanguages();
   }),
-  getLanguageById: publicProcedure.input(languageIdSchema).query(async ({ input }) => {
-    return getLanguageById(input.id);
-  }),
+  getLanguageById: publicProcedure
+    .input(languageIdSchema)
+    .query(async ({ input }) => {
+      return getLanguageById(input.id);
+    }),
   createLanguage: publicProcedure
     .input(insertLanguageParams)
     .mutation(async ({ input }) => {

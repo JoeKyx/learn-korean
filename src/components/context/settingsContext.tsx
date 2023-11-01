@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
 import { Language } from '@/lib/db/schema/languages';
@@ -13,38 +13,44 @@ interface SettingsContextProps {
   soundsEnabled: boolean;
 }
 
-const SettingsContext = createContext<SettingsContextProps | undefined>(undefined);
+const SettingsContext = createContext<SettingsContextProps | undefined>(
+  undefined
+);
 
 export const useSettings = (): SettingsContextProps => {
   const context = useContext(SettingsContext);
   if (!context) {
-    throw new Error("useSettings must be used within a SettingsProvider");
+    throw new Error('useSettings must be used within a SettingsProvider');
   }
   return context;
 };
 
 interface SettingsProviderProps {
-  availableLanguages: Language[],
-  userSettings: UserSetting,
+  availableLanguages: Language[];
+  userSettings: UserSetting;
   children: ReactNode;
 }
 
-export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children, availableLanguages, userSettings }) => {
+export const SettingsProvider: React.FC<SettingsProviderProps> = ({
+  children,
+  availableLanguages,
+  userSettings,
+}) => {
   const defaultLanguage = userSettings?.languageId
-    ? availableLanguages.find((language) => language.id === userSettings.languageId)
+    ? availableLanguages.find(
+        (language) => language.id === userSettings.languageId
+      )
     : availableLanguages[0];
 
   if (!defaultLanguage) {
-    throw new Error("No matching language found");
+    throw new Error('No matching language found');
   }
 
   const [language, setLanguage] = useState<Language>(defaultLanguage);
-  const [soundsEnabled, setSoundsEnabled] = useState<boolean>(true);
+  const [soundsEnabled, _setSoundsEnabled] = useState<boolean>(true);
 
-
-  const { mutate: upsertLanguage, isLoading: isLanguageUpserting } =
-    trpc.userSettings.upsertUserSetting.useMutation({
-    });
+  const { mutate: upsertLanguage } =
+    trpc.userSettings.upsertUserSetting.useMutation({});
 
   const changeLanguage = (newLanguage: Language) => {
     setLanguage(newLanguage);
@@ -55,9 +61,16 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children, av
 
   const userId = userSettings?.userId;
 
-
   return (
-    <SettingsContext.Provider value={{ language, changeLanguage, availableLanguages, userId, soundsEnabled }}>
+    <SettingsContext.Provider
+      value={{
+        language,
+        changeLanguage,
+        availableLanguages,
+        userId,
+        soundsEnabled,
+      }}
+    >
       {children}
     </SettingsContext.Provider>
   );
