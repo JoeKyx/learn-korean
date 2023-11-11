@@ -148,6 +148,62 @@
       "when": 1698555017824,
       "tag": "0020_furry_hiroim",
       "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "5",
+      "when": 1699354903260,
+      "tag": "0021_yellow_raza",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "5",
+      "when": 1699355563746,
+      "tag": "0022_mushy_arclight",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "5",
+      "when": 1699355587135,
+      "tag": "0023_tense_changeling",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "5",
+      "when": 1699356272413,
+      "tag": "0024_demonic_glorian",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "5",
+      "when": 1699356354390,
+      "tag": "0025_typical_war_machine",
+      "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "5",
+      "when": 1699357489145,
+      "tag": "0026_lethal_madame_masque",
+      "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "5",
+      "when": 1699375169098,
+      "tag": "0027_damp_thunderbolts",
+      "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "5",
+      "when": 1699375224713,
+      "tag": "0028_minor_blacklash",
+      "breakpoints": true
     }
   ]
 }

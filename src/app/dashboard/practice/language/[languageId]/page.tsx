@@ -36,12 +36,16 @@ export default async function Practice({
     availableCategoriesRes,
   ]);
 
+  const randomizedOrderWords = practiceLessonData.lesson.words.sort(
+    () => Math.random() - 0.5
+  );
+
   return (
-    <main className='flex flex-col items-center w-full h-screen justify-center gap-10'>
+    <main className='flex flex-col items-center w-full pt-10 justify-center gap-10'>
       <h1>Practice</h1>
       <Suspense fallback={<div>Loading...</div>}>
         <WordPracticeProvider
-          initialWords={practiceLessonData.lesson.words}
+          initialWords={randomizedOrderWords}
           availableCategories={availableCategoriesData.wordCategories}
         >
           <WordSwiper />

@@ -1,10 +1,12 @@
 import { ClerkProvider } from '@clerk/nextjs';
 import { Metadata } from 'next';
+import { Indie_Flower } from 'next/font/google';
 import * as React from 'react';
 
 import '@/styles/globals.css';
 
 import TrpcProvider from '@/lib/trpc/Provider';
+import { cn } from '@/lib/utils';
 
 import { Toaster } from '@/components/ui/toaster';
 
@@ -51,14 +53,23 @@ export const metadata: Metadata = {
   // ],
 };
 
+const indie_flower = Indie_Flower({
+  weight: '400',
+  display: 'swap',
+  subsets: ['latin'],
+  variable: '--font-indie-flower',
+});
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html>
-      <body className='bg-sky-100'>
+    <html
+      className={cn(indie_flower.variable, '!scroll-smooth overflow-x-hidden')}
+    >
+      <body className='bg-slate-200'>
         <ClerkProvider>
           <TrpcProvider>
             {children}

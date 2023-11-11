@@ -12,12 +12,14 @@ import logger from '@/lib/logger';
 import { trpc } from '@/lib/trpc/client';
 import { handleError } from '@/lib/utils';
 
+import AchievementToastDescription from '@/components/achievements/AchievementToast';
 import Button from '@/components/buttons/Button';
 import CategoryOverview from '@/components/practice/CategoryOverview';
 import LessonProgress from '@/components/practice/LessonProgress';
 import LevelOverview from '@/components/practice/LevelOverview';
 import { ModeType } from '@/components/practice/WordPracticeContext';
 import { useWordPractice } from '@/components/practice/WordPracticeContext';
+import { toast } from '@/components/ui/use-toast';
 
 export type IconType = {
   name: string;
@@ -117,7 +119,22 @@ export default function WordSwiper() {
   const { currentWord, mode, wordCategories, noWords } = practiceContext.state;
 
   const { mutate: createUserWord, error } =
-    trpc.userWords.createUserWord.useMutation({});
+    trpc.userWords.createUserWord.useMutation({
+      onError: handleError,
+      onSuccess: (data) => {
+        if (data.success) {
+          data.achievments.forEach((achievment) => {
+            toast({
+              title: 'Unlocked Achievment',
+              description: (
+                <AchievementToastDescription achievment={achievment} />
+              ),
+              variant: 'default',
+            });
+          });
+        }
+      },
+    });
 
   const handleSwipe = (success: boolean, wasSwipe: boolean) => {
     let newLevel = currentWord
@@ -267,7 +284,7 @@ export default function WordSwiper() {
       {error ? <span>{error.message}</span> : null}
 
       <div
-        className={`my-auto w-96 h-52 flex flex-col items-center rounded-md shadow-md 
+        className={`my-auto w-full h-52 flex flex-col items-center rounded-md shadow-md 
     ${wasCorrectSwipe ? 'card-correct-swipe' : ''}
     ${wasIncorrectSwipe ? 'card-incorrect-swipe' : ''}
     ${
@@ -301,7 +318,8 @@ export default function WordSwiper() {
                 })}
               </div>
               <span className='ml-auto'>
-                {currentWord ? calculateWordLevel(currentWord) : 1} - {mode}
+                {currentWord ? calculateWordLevel(currentWord) : 1} -{' '}
+                {mode === 'english' ? 'English' : 'Foreign'}
               </span>
             </div>
 

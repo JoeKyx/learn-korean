@@ -1,0 +1,1 @@
+ALTER TABLE `last_lessons` ADD `created_at` date NOT NULL;

@@ -1,0 +1,1 @@
+ALTER TABLE `last_lessons` MODIFY COLUMN `created_at` datetime NOT NULL;

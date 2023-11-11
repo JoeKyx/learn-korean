@@ -9,9 +9,13 @@ import { Progress } from '@/components/ui/progress';
 
 type LessonProgressProps = {
   practiceWords?: PracticeWords;
+  className?: string;
 };
 
-const LessonProgress: React.FC<LessonProgressProps> = ({ practiceWords }) => {
+const LessonProgress: React.FC<LessonProgressProps> = ({
+  practiceWords,
+  className,
+}) => {
   const practiceContext = useWordPractice();
 
   const allWords = practiceWords || practiceContext.state.allWords;
@@ -39,7 +43,7 @@ const LessonProgress: React.FC<LessonProgressProps> = ({ practiceWords }) => {
     : 0;
 
   return (
-    <div>
+    <div className={className}>
       {showLevelSummary &&
         uniqueLevels.map((level) => {
           return (

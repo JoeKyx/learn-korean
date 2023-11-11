@@ -1,0 +1,1 @@
+ALTER TABLE `last_lessons` DROP COLUMN `language_id`;

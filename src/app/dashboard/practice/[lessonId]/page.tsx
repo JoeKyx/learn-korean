@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 
+import { createLastLesson } from '@/lib/api/lastLessons/mutations';
 import {
   getAllLessons,
   getLessonById,
@@ -26,7 +27,7 @@ export default async function Practice({
   const lessonIdNumber = parseInt(params.lessonId);
 
   return (
-    <main className='flex flex-col items-center w-full h-screen justify-center gap-10'>
+    <main className='flex flex-col items-center w-full pt-10 justify-center gap-10'>
       <Suspense fallback={<div>Loading...</div>}>
         <LessonName lessonIdNumber={lessonIdNumber} />
       </Suspense>
@@ -50,15 +51,20 @@ async function LessonName({ lessonIdNumber }: { lessonIdNumber: number }) {
 async function PracticeLesson({ lessonIdNumber }: { lessonIdNumber: number }) {
   const practiceLessonRes = getPracticeLessons(true, lessonIdNumber);
   const availableCategoriesRes = getWordCategories();
+  createLastLesson({ lessonId: lessonIdNumber });
 
   const [practiceLessonData, availableCategoriesData] = await Promise.all([
     practiceLessonRes,
     availableCategoriesRes,
   ]);
 
+  const randomizedOrderWords = practiceLessonData.lesson.words.sort(
+    () => Math.random() - 0.5
+  );
+
   return (
     <WordPracticeProvider
-      initialWords={practiceLessonData.lesson.words}
+      initialWords={randomizedOrderWords}
       availableCategories={availableCategoriesData.wordCategories}
     >
       <WordSwiper />

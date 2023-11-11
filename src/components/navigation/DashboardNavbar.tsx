@@ -1,5 +1,8 @@
 'use client';
 
+import { useUser } from '@clerk/nextjs';
+import { UserResource } from '@clerk/types';
+import { AvatarFallback } from '@radix-ui/react-avatar';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -16,6 +19,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -23,46 +27,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
-
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: 'Alert Dialog',
-    href: '/docs/primitives/alert-dialog',
-    description:
-      'A modal dialog that interrupts the user with important content and expects a response.',
-  },
-  {
-    title: 'Hover Card',
-    href: '/docs/primitives/hover-card',
-    description:
-      'For sighted users to preview content available behind a link.',
-  },
-  {
-    title: 'Progress',
-    href: '/docs/primitives/progress',
-    description:
-      'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.',
-  },
-  {
-    title: 'Scroll-area',
-    href: '/docs/primitives/scroll-area',
-    description: 'Visually or semantically separates content.',
-  },
-  {
-    title: 'Tabs',
-    href: '/docs/primitives/tabs',
-    description:
-      'A set of layered sections of content—known as tab panels—that are displayed one at a time.',
-  },
-  {
-    title: 'Tooltip',
-    href: '/docs/primitives/tooltip',
-    description:
-      'A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.',
-  },
-];
 
 export function DashboardNavbar({ lessons }: { lessons: LessonWithCategory }) {
   const {
@@ -72,6 +37,8 @@ export function DashboardNavbar({ lessons }: { lessons: LessonWithCategory }) {
   } = useSettings();
 
   const { push } = useRouter();
+
+  const { user } = useUser();
 
   // Filter out lessons that are not for the selected language, if a category has no lessons for the selected language, remove the category
   const filteredLessons = Object.values(lessons)
@@ -85,61 +52,68 @@ export function DashboardNavbar({ lessons }: { lessons: LessonWithCategory }) {
     })
     .filter((category) => category.lessons.length > 0);
 
+  const fallbackAvatarHandle = (user: UserResource) => {
+    if (user.username) {
+      return user.username.slice(0, 2);
+    } else if (user.firstName) {
+      return user.firstName.charAt(0);
+    } else {
+      return 'U';
+    }
+  };
+
+  const username = user?.username || user?.firstName || 'User';
+
   return (
-    <NavigationMenu className='z-[1] flex w-screen justify-center items-center bg-primary-200 shadow-md p-2 px-4'>
-      <NavigationMenuList className='flex items-center justify-center md:justify-start w-screen'>
-        <NavigationMenuItem>
+    <NavigationMenu className='z-[1] flex justify-center items-center  shadow-md p-2'>
+      <NavigationMenuList className='flex items-center justify-between w-screen px-4'>
+        <div className='flex items-center'>
           {availableLanguages.map((language) => (
-            <Button
-              key={language.id}
-              className='mx-2'
-              variant={
-                selectedLanguage.id === language.id ? 'primary' : 'outline'
-              }
-              onClick={() => {
-                changeLanguage(language);
-                push(`/dashboard/${language.id}`);
-              }}
-            >
-              <div className='flex items-center justify-center gap-2'>
-                <span className='hidden md:block'>{language.language}</span>
-                <Image
-                  src={`/svg/flag_${language.id}.svg`}
-                  alt={language.language}
-                  width={20}
-                  height={20}
-                />
-              </div>
-            </Button>
+            <NavigationMenuItem key={language.id}>
+              <Button
+                className='mx-2 group/lang hover:scale-105 transition-all'
+                variant={
+                  selectedLanguage.id === language.id ? 'primary' : 'outline'
+                }
+                onClick={() => {
+                  changeLanguage(language);
+                  push(`/dashboard/${language.id}`);
+                }}
+              >
+                <div className='flex items-center justify-center gap-2'>
+                  <span className='hidden md:block'>{language.language}</span>
+                  <Image
+                    src={`/svg/flag_${language.id}.svg`}
+                    alt={language.language}
+                    width={20}
+                    height={20}
+                    className='group-hover/lang:scale-125 transition-all'
+                  />
+                </div>
+              </Button>
+            </NavigationMenuItem>
           ))}
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href='/dashboard' legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Dashboard
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Vocabulary</NavigationMenuTrigger>
-          <NavigationMenuContent className='bg-primary-200'>
-            <ul className='grid gap-3 p-6 w-[300px] grid-cols-1 lg:w-[400px] lg:grid-cols-2'>
-              <li className='lg:col-span-2'>
-                <NavigationMenuLink asChild>
-                  <Link
-                    className='flex p-2 select-none flex-col justify-end rounded-md bg-neutral-100 hover:bg-primary-100 transition-colors no-underline outline-none focus:shadow-md'
-                    href={`/dashboard/lessons/${selectedLanguage.id}`}
-                  >
-                    <div className='mb-2 text-lg font-medium'>
-                      Lesson Overview
-                    </div>
-                    <p className='text-sm leading-tight text-muted-foreground'>
-                      Get an overview of the lessons available and your progress
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <div>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Vocabulary</NavigationMenuTrigger>
+            <NavigationMenuContent className='bg-primary-200'>
+              <ul className='grid gap-3 p-6 w-[300px] grid-cols-1 lg:w-[400px] lg:grid-cols-2'>
+                <li className='lg:col-span-2'>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      className='flex p-2 select-none flex-col justify-end rounded-md bg-neutral-100 hover:bg-primary-100 transition-colors no-underline outline-none focus:shadow-md'
+                      href={`/dashboard/lessons/${selectedLanguage.id}`}
+                    >
+                      <div className='mb-2 text-lg font-medium'>
+                        Lesson Overview
+                      </div>
+                      <p className='text-sm leading-tight text-muted-foreground'>
+                        Get an overview of the lessons available and your
+                        progress
+                      </p>
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+
                 <Accordion type='single' collapsible>
                   {filteredLessons.map((category) => (
                     <AccordionItem value={category.name} key={category.id}>
@@ -158,27 +132,31 @@ export function DashboardNavbar({ lessons }: { lessons: LessonWithCategory }) {
                     </AccordionItem>
                   ))}
                 </Accordion>
-              </div>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className='grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] '>
-              {components.map((component) => (
-                <ListItem
-                  key={component.title}
-                  title={component.title}
-                  href={component.href}
-                >
-                  {component.description}
-                </ListItem>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </div>
+        <div className='flex items-center'>
+          {user && (
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className='ml-auto flex items-center gap-4'>
+                <span>
+                  Hi <span className='font-semibold'>{username}</span>!
+                </span>
+                <Avatar>
+                  <AvatarImage
+                    src={user.imageUrl}
+                    alt={user.username || 'Proile Picture of user'}
+                  />
+                  <AvatarFallback>{fallbackAvatarHandle(user)}</AvatarFallback>
+                </Avatar>
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className='bg-primary-200'>
+                Test
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          )}
+        </div>
       </NavigationMenuList>
     </NavigationMenu>
   );

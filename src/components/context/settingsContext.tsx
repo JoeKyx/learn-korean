@@ -2,6 +2,7 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
 import { Language } from '@/lib/db/schema/languages';
+import { LessonId } from '@/lib/db/schema/lessons';
 import { UserSetting } from '@/lib/db/schema/userSettings';
 import { trpc } from '@/lib/trpc/client';
 
@@ -49,13 +50,19 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   const [language, setLanguage] = useState<Language>(defaultLanguage);
   const [soundsEnabled, _setSoundsEnabled] = useState<boolean>(true);
 
-  const { mutate: upsertLanguage } =
+  const { mutate: upsertSettings } =
     trpc.userSettings.upsertUserSetting.useMutation({});
 
   const changeLanguage = (newLanguage: Language) => {
     setLanguage(newLanguage);
-    upsertLanguage({
+    upsertSettings({
       languageId: newLanguage.id,
+    });
+  };
+
+  const _updateLastLessonId = (_lessonId: LessonId) => {
+    upsertSettings({
+      languageId: userSettings?.languageId,
     });
   };
 

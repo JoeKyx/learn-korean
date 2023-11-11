@@ -14,6 +14,7 @@ const ButtonLinkVariant = [
   'ghost',
   'light',
   'dark',
+  'secondary',
 ] as const;
 const ButtonLinkSize = ['sm', 'base'] as const;
 
@@ -52,7 +53,8 @@ const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
           'inline-flex items-center rounded font-medium',
           'focus-visible:ring-primary-500 focus:outline-none focus-visible:ring',
           'shadow-sm',
-          'transition-colors duration-75',
+          'transition-all duration-75',
+          'hover:scale-110 active:scale-105',
           //#region  //*=========== Size ===========
           [
             size === 'base' && ['px-3 py-1.5', 'text-sm md:text-base'],
@@ -92,6 +94,13 @@ const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
               'bg-gray-900 text-white',
               'border border-gray-600',
               'hover:bg-gray-800 active:bg-gray-700 disabled:bg-gray-700',
+            ],
+            variant === 'secondary' && [
+              'bg-slate-300/40 text-slate-800',
+              'border-slate-600 border',
+              'hover:bg-slate-300/70 hover:text-slate-900',
+              'active:bg-slate-300/70',
+              'disabled:bg-slate-500/60',
             ],
           ],
           //#endregion  //*======== Variants ===========

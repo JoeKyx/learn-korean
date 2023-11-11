@@ -1,5 +1,6 @@
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 
+import { getUserAuth } from '@/lib/auth/utils';
 import { db } from '@/lib/db';
 import {
   insertWordSchema,
@@ -40,9 +41,14 @@ export const updateWord = async (id: WordId, word: UpdateWordParams) => {
 };
 
 export const deleteWord = async (id: WordId) => {
+  const { session } = await getUserAuth();
+  if (!session?.user.id) throw Error('User ID is required');
+
   const { id: wordId } = wordIdSchema.parse({ id });
   try {
-    await db.delete(words).where(eq(words.id, wordId));
+    await db
+      .delete(words)
+      .where(and(eq(words.id, wordId), eq(words.userId, session.user.id)));
     return { success: true };
   } catch (err) {
     const message = (err as Error).message ?? 'Error, please try again';

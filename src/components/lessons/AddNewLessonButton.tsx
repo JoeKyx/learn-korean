@@ -4,6 +4,8 @@ import { FC, forwardRef } from 'react';
 import { HTMLAttributes } from 'react';
 import { useState } from 'react';
 
+import { cn } from '@/lib/utils';
+
 import Button from '@/components/buttons/Button';
 import { useSettings } from '@/components/context/settingsContext';
 import AddNewLessonForm from '@/components/lessons/AddNewLessonForm';
@@ -31,7 +33,16 @@ const AddNewLessonButton: FC<AddNewLessonButtonProps> = forwardRef<
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button leftIcon={Plus} className={className} ref={ref} {...rest}>
+        <Button
+          leftIcon={Plus}
+          className={cn(className, 'group')}
+          ref={ref}
+          {...rest}
+          classNames={{
+            leftIcon:
+              'group-hover:rotate-180 transition-all duration-150 ease-in-out',
+          }}
+        >
           Add New Lesson
         </Button>
       </DialogTrigger>

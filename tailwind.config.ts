@@ -7,6 +7,7 @@ export default {
     extend: {
       fontFamily: {
         primary: ['Inter', ...defaultTheme.fontFamily.sans],
+        handwritten: ['var(--font-indie-flower)'],
       },
       colors: {
         primary: {

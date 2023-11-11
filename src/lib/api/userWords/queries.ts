@@ -1,4 +1,4 @@
-import { and, eq } from 'drizzle-orm';
+import { and, eq, sql } from 'drizzle-orm';
 
 import { getUserAuth } from '@/lib/auth/utils';
 import { db } from '@/lib/db';
@@ -70,4 +70,14 @@ export const getAmountOfWordsPractied = async (languageId: LanguageId) => {
     )
     .groupBy(userWords.wordId);
   return u.length;
+};
+
+export const getAmountOfSwipes = async () => {
+  const { session } = await getUserAuth();
+  if (!session?.user.id) throw Error('User ID is required');
+  const u = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(userWords)
+    .where(eq(userWords.userId, session?.user.id));
+  return u[0].count ?? 0;
 };

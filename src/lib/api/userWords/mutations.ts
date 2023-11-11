@@ -4,6 +4,7 @@ import {
   createDatesStudie,
   updateDatesStudie,
 } from '@/lib/api/datesStudied/mutations';
+import { updateUserCards } from '@/lib/api/userCards/mutations';
 import { getUserAuth } from '@/lib/auth/utils';
 import { db } from '@/lib/db';
 import { datesStudied } from '@/lib/db/schema/datesStudied';
@@ -29,7 +30,9 @@ export const createUserWord = async (userWord: NewUserWordParams) => {
   try {
     await db.insert(userWords).values(newUserWord);
     await addDateStudied(userWord);
-    return { success: true };
+    const achievments = await updateUserCards();
+
+    return { success: true, achievments };
   } catch (err) {
     const message = (err as Error).message ?? 'Error, please try again';
     logger(message);

@@ -24,12 +24,13 @@ export default async function layout({
   ]);
 
   return (
-    <div className='w-screen h-screen'>
+    <div className='w-full'>
       <SettingsProvider
         availableLanguages={languages.languages}
         userSettings={userSettings.userSettings}
       >
         <DashboardNavbar lessons={lessons.categories} />
+        {/* <NavigationMenuDemo /> */}
         {children}
       </SettingsProvider>
     </div>

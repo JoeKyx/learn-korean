@@ -1,0 +1,1 @@
+ALTER TABLE `user_settings` ADD `last_lesson_id` int;

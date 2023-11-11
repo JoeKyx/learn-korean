@@ -1,3 +1,5 @@
+import { Achievment } from '@/lib/types';
+
 export function getFromLocalStorage(key: string): string | null {
   if (typeof window !== 'undefined') {
     return window.localStorage.getItem(key);
@@ -27,4 +29,13 @@ export function shuffleArray<T>(array: T[]): T[] {
   }
 
   return array;
+}
+
+export function getImageUrlForAchievment(achievment: Achievment) {
+  switch (achievment.type) {
+    case 'card':
+      return `/images/unlocks/cards/${achievment.image}`;
+    default:
+      return '';
+  }
 }

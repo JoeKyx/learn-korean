@@ -168,6 +168,7 @@ const wordPracticeReducer = (
       });
       let noWords = false;
       let nextCurrentWord = state.currentWord;
+
       if (
         filteredWords.length &&
         !filteredWords.includes(state.currentWord as PracticeWord)
@@ -232,9 +233,7 @@ const wordPracticeReducer = (
         }
       });
       const updatedFilteredWords = applyFilters(updatedAllWords, state.filters);
-      const newCurrentWord = updatedFilteredWords.includes(
-        state.currentWord as PracticeWord
-      )
+      const newCurrentWord = updatedFilteredWords.includes(updatedCurrentWord)
         ? updatedCurrentWord
         : updatedFilteredWords[0] || null;
       logger(newCurrentWord, 'newCurrentWord');
@@ -302,6 +301,7 @@ type WordPracticeProviderProps = {
   children: React.ReactNode;
   initialWords: PracticeWords;
   availableCategories: WordCategorie[];
+  lessonId?: number;
 };
 
 export const WordPracticeProvider: React.FC<WordPracticeProviderProps> = ({

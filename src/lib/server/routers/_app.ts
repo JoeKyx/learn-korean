@@ -1,10 +1,13 @@
+import { cardDesignsRouter } from './cardDesigns';
 import { datesStudiedRouter } from './datesStudied';
 import { languagesRouter } from './languages';
+import { lastLessonsRouter } from './lastLessons';
 import { lessonCategoriesRouter } from './lessonCategories';
 import { lessonsRouter } from './lessons';
 import { testingModelsRouter } from './testingModels';
 import { testsRouter } from './tests';
 import { tests2Router } from './tests2';
+import { userCardsRouter } from './userCards';
 import { userSettingsRouter } from './userSettings';
 import { userWordsRouter } from './userWords';
 import { wordCategoriesRouter } from './wordCategories';
@@ -25,6 +28,9 @@ export const appRouter = router({
   wordUserCategories: wordUserCategoriesRouter,
   datesStudied: datesStudiedRouter,
   lessonCategories: lessonCategoriesRouter,
+  lastLessons: lastLessonsRouter,
+  cardDesigns: cardDesignsRouter,
+  userCards: userCardsRouter,
 });
 
 export type AppRouter = typeof appRouter;

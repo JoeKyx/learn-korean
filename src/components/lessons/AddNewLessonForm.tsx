@@ -3,6 +3,8 @@ import { useUser } from '@clerk/nextjs';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { BiSave } from 'react-icons/bi';
+import { MdDelete } from 'react-icons/md';
 import { z } from 'zod';
 
 import {
@@ -162,13 +164,19 @@ const LessonForm = ({
             type='submit'
             className='mr-1'
             disabled={isCreating || isUpdating}
+            rightIcon={BiSave}
           >
             {editing
               ? `Sav${isUpdating ? 'ing...' : 'e'}`
               : `Creat${isCreating ? 'ing...' : 'e'}`}
           </Button>
-          {editing ? (
-            <Button type='button' onClick={deleteHandler}>
+          {editing && lesson.userId == user.user?.id ? (
+            <Button
+              type='button'
+              onClick={deleteHandler}
+              variant='danger'
+              rightIcon={MdDelete}
+            >
               Delet{isDeleting ? 'ing...' : 'e'}
             </Button>
           ) : null}

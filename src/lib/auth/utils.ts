@@ -1,7 +1,7 @@
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 
-type AuthSession = {
+export type AuthSession = {
   session: {
     user: {
       id: string;

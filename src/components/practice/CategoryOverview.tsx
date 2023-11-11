@@ -27,7 +27,6 @@ const CategoryOverview: FC = () => {
       tmpCategoryFilters.push(category);
     }
     setCurrentCategoryFilters(tmpCategoryFilters);
-    logger(tmpCategoryFilters, 'Applying Category Filters');
     practiceContext.dispatch({
       type: 'SET_FILTERS',
       payload: { categories: tmpCategoryFilters },
