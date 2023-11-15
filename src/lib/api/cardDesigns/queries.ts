@@ -5,7 +5,7 @@ import {
   type CardDesignId,
   cardDesignIdSchema,
   cardDesigns,
-} from '@/lib/db/schema/carddesigns';
+} from '@/lib/db/schema/cardDesigns';
 
 export const getCardDesigns = async () => {
   const c = await db.select().from(cardDesigns);

@@ -2,7 +2,7 @@ import { and, eq } from 'drizzle-orm';
 
 import { getUserAuth } from '@/lib/auth/utils';
 import { db } from '@/lib/db';
-import { cardDesigns } from '@/lib/db/schema/carddesigns';
+import { cardDesigns } from '@/lib/db/schema/cardDesigns';
 import {
   type UserCardId,
   userCardIdSchema,

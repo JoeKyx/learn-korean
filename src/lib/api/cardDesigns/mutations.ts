@@ -9,7 +9,7 @@ import {
   NewCardDesignParams,
   UpdateCardDesignParams,
   updateCardDesignSchema,
-} from '@/lib/db/schema/carddesigns';
+} from '@/lib/db/schema/cardDesigns';
 
 export const createCardDesign = async (cardDesign: NewCardDesignParams) => {
   const newCardDesign = insertCardDesignSchema.parse(cardDesign);
